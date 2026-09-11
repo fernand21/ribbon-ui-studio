@@ -18,13 +18,36 @@ await rm(nestedBasePath, { recursive: true, force: true });
 const workerUrl = pathToFileURL(path.join(root, "dist", "server", "index.js"));
 workerUrl.searchParams.set("pages", Date.now().toString());
 const { default: worker } = await import(workerUrl.href);
-const response = await worker.fetch(
-  new Request("https://fernand21.github.io/ribbon-ui-studio/", { headers: { accept: "text/html" } }),
-  { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
-  { waitUntil() {}, passThroughOnException() {} },
-);
 
-if (!response.ok) throw new Error(`Static render failed: ${response.status}`);
-await writeFile(path.join(output, "index.html"), await response.text(), "utf8");
+const siteBaseUrl = "https://fernand21.github.io/ribbon-ui-studio";
+const workerEnv = {
+  ASSETS: {
+    fetch: async () => new Response("Not found", { status: 404 }),
+  },
+};
+const workerCtx = { waitUntil() {}, passThroughOnException() {} };
+
+async function renderPage(route, destination) {
+  const response = await worker.fetch(
+    new Request(`${siteBaseUrl}${route}`, { headers: { accept: "text/html" } }),
+    workerEnv,
+    workerCtx,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Static render failed for ${route}: ${response.status}`);
+  }
+
+  const target = path.join(output, destination);
+  await mkdir(path.dirname(target), { recursive: true });
+  await writeFile(target, await response.text(), "utf8");
+}
+
+// Render every application route that must work as a real GitHub Pages URL.
+// In particular, /docs/ must come from app/docs rather than an old static
+// public/docs page, so it shares the homepage theme and multilingual UI.
+await renderPage("/", "index.html");
+await renderPage("/docs/", "docs/index.html");
+
 await writeFile(path.join(output, ".nojekyll"), "", "utf8");
 console.log(output);
