@@ -27,12 +27,33 @@ const workerEnv = {
 };
 const workerCtx = { waitUntil() {}, passThroughOnException() {} };
 
+async function fetchRenderedHtml(initialUrl) {
+  let currentUrl = initialUrl;
+
+  for (let redirectCount = 0; redirectCount < 5; redirectCount += 1) {
+    const response = await worker.fetch(
+      new Request(currentUrl, { headers: { accept: "text/html" } }),
+      workerEnv,
+      workerCtx,
+    );
+
+    if ([301, 302, 303, 307, 308].includes(response.status)) {
+      const location = response.headers.get("location");
+      if (!location) {
+        throw new Error(`Redirect without Location while rendering ${initialUrl}`);
+      }
+      currentUrl = new URL(location, currentUrl).href;
+      continue;
+    }
+
+    return response;
+  }
+
+  throw new Error(`Too many redirects while rendering ${initialUrl}`);
+}
+
 async function renderPage(route, destination) {
-  const response = await worker.fetch(
-    new Request(`${siteBaseUrl}${route}`, { headers: { accept: "text/html" } }),
-    workerEnv,
-    workerCtx,
-  );
+  const response = await fetchRenderedHtml(`${siteBaseUrl}${route}`);
 
   if (!response.ok) {
     throw new Error(`Static render failed for ${route}: ${response.status}`);
@@ -44,8 +65,8 @@ async function renderPage(route, destination) {
 }
 
 // Render every application route that must work as a real GitHub Pages URL.
-// In particular, /docs/ must come from app/docs rather than an old static
-// public/docs page, so it shares the homepage theme and multilingual UI.
+// /docs/ is generated from app/docs so it shares the homepage theme and
+// multilingual UI instead of falling back to the removed legacy static page.
 await renderPage("/", "index.html");
 await renderPage("/docs/", "docs/index.html");
 
