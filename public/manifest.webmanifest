@@ -2,9 +2,24 @@
   "name": "Ribbon UI Studio",
   "short_name": "Ribbon UI Studio",
   "description": "Design and edit Microsoft Office RibbonX with VBA and package add-ins with Windows installers.",
+  "id": "/ribbon-ui-studio/",
   "start_url": "/ribbon-ui-studio/",
   "scope": "/ribbon-ui-studio/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0e66d4"
+  "theme_color": "#0e66d4",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
