@@ -1,0 +1,40 @@
+name: One-time docs code block CSS fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-codeblock-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fix copied code block styling
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('app/docs/docs.module.css')
+          s = p.read_text(encoding='utf-8')
+          needle = '.codeBlock pre{margin:0;padding:18px;overflow:auto;color:#dce7ef;font:12px/1.65 var(--font-geist-mono),Consolas,monospace}'
+          fix = '.codeBlock pre code{background:transparent!important;color:inherit!important;padding:0!important;border-radius:0!important;font-size:inherit!important;box-shadow:none!important}.codeBlock pre code::selection{background:#264a68;color:#fff}'
+          if fix in s:
+              raise SystemExit('Fix already present')
+          if needle not in s:
+              raise SystemExit('Expected code block rule not found')
+          s = s.replace(needle, needle + fix, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/docs/docs.module.css
+          git commit -m "docs: fix code block text background"
+          git push
