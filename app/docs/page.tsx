@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import DocsClient from "./docs-client";
 
+const socialImage = "https://fernand21.github.io/ribbon-ui-studio/og.png";
+
 export const metadata: Metadata = {
   title: "Ribbon UI Studio v3.2 Documentation — RibbonX, VBA, imageMso & Office Add-ins",
   description:
@@ -28,13 +30,13 @@ export const metadata: Metadata = {
     title: "Ribbon UI Studio v3.2 Documentation",
     description: "From Office file to RibbonX, VBA callbacks, add-ins and Windows distribution in one practical guide.",
     url: "https://fernand21.github.io/ribbon-ui-studio/docs/",
-    images: [{ url: "../og.png", alt: "Ribbon UI Studio" }]
+    images: [{ url: socialImage, alt: "Ribbon UI Studio" }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Ribbon UI Studio v3.2 Documentation",
     description: "RibbonX, VBA, imageMso, Office add-ins and packaging documentation.",
-    images: ["../og.png"]
+    images: [socialImage]
   }
 };
 
