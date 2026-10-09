@@ -35,7 +35,20 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
             <span>Ribbon Visual Designer</span><span>VBA UserForms</span><span>Modern Forms · PRO</span><span>Add-in Licensing · PRO</span>
           </div>
         </div>
-        <img src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`} alt="Ribbon UI Studio v4 Ribbon Visual Designer" />
+        <a
+          className="v4-showcase-image"
+          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`}
+          target="_blank"
+          rel="noreferrer"
+          title={es ? "Abrir imagen a resolución completa" : "Open full-resolution image"}
+        >
+          <img
+            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`}
+            alt="Ribbon UI Studio v4 Ribbon Visual Designer"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
       </section>
 
       <section className="v4-editions" id="editions">
@@ -123,8 +136,39 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
           : "InstallerLab is a separate application and must be installed to generate EXE, MSI or Bundle."} <a href="https://installerlab.website/" target="_blank" rel="noreferrer">installerlab.website ↗</a></p>
       </div>
 
+      <div className="v4-gallery-heading">
+        <h3>{es ? "Capturas de v4 en alta resolución" : "v4 screenshots in high resolution"}</h3>
+        <p>{es
+          ? "Las imágenes se muestran a mayor tamaño para que puedas leer la interfaz. Haz clic en cualquier captura para abrir el archivo a resolución completa."
+          : "Screenshots are displayed larger so the interface remains readable. Click any image to open the full-resolution file."}</p>
+      </div>
       <div className="v4-doc-gallery">
-        {shots.map(([file,title,body]) => <figure key={file}><img src={`${siteBase}/screenshots/${file}`} alt={title} loading="lazy"/><figcaption><strong>{title}</strong><span>{body}</span></figcaption></figure>)}
+        {shots.map(([file,title,body], index) => {
+          const src = `${siteBase}/screenshots/${file}`;
+          return (
+            <figure key={file}>
+              <a
+                className="v4-shot-link"
+                href={src}
+                target="_blank"
+                rel="noreferrer"
+                title={es ? "Abrir a resolución completa" : "Open full resolution"}
+              >
+                <img
+                  src={src}
+                  alt={title}
+                  loading={index < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </a>
+              <figcaption>
+                <strong>{title}</strong>
+                <span>{body}</span>
+                <small>{es ? "🔍 Clic para ver a resolución completa" : "🔍 Click to view full resolution"}</small>
+              </figcaption>
+            </figure>
+          );
+        })}
       </div>
       <div className="v4-example-note">
         <strong>{es ? "Sobre las capturas de LittleAPI" : "About the LittleAPI screenshots"}</strong>
