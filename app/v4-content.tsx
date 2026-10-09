@@ -1,19 +1,37 @@
 type V4Props = { lang: string; siteBase: string };
 
 const screenshots = [
-  ["v4-ribbon-visual-designer.png", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a sharp live Office-style preview, structure tree and properties.", 1475, 875],
-  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Create and edit native VBA/MSForms UserForms visually. This real license-activation form shows that classic UserForms are available in Community as well as PRO.", 1475, 950],
+  ["v4-ribbon-visual-designer.png", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a live Office-style preview, structure tree and property editor.", 1475, 875],
+  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Create and edit native VBA/MSForms UserForms visually. This license-activation form also shows that classic UserForms are available in Community.", 1475, 950],
   ["v4-modern-forms-designer.png", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview. Modern Forms are exclusive to PRO.", 1475, 950],
-  ["v4-pro-license-tools.png", "Add-in Licensing · PRO", "Ribbon UI Studio PRO includes License Generator, Inject Validator and Remove Validator tools so licensing can be added to or removed from Office add-ins.", 1440, 981],
-  ["v4-littleapi-connection-excel.png", "Modern Form running in Excel · PRO", "A real LittleAPI connection form running inside Excel, showing the Modern Forms runtime in an actual Office add-in workflow.", 1920, 1140]
+  ["v4-pro-license-tools.png", "Add-in Licensing Tools · PRO", "License Generator, Inject Validator and Remove Validator let PRO users add licensing to an Office add-in or remove it later.", 1440, 981],
+  ["v4-littleapi-not-configured.png", "Modern warning dialog in Excel · PRO", "A real modern dialog running inside Excel. This LittleAPI sample shows how an add-in can guide the user when configuration is missing.", 1920, 1140],
+  ["v4-littleapi-connection-form.png", "Modern Form running in Excel · PRO", "A real LittleAPI connection form running inside Excel, showing the Modern Forms runtime in an Office add-in workflow.", 1920, 1140],
+  ["v4-littleapi-connection-success.png", "Modern information dialog in Excel · PRO", "A real successful-connection message displayed by an Office add-in using the modern dialog runtime.", 1920, 1140],
+  ["v4-littleapi-reload-confirm.png", "Modern confirmation dialog in Excel · PRO", "A Yes/No confirmation flow running inside Excel, demonstrating a modern VBA-compatible dialog.", 1920, 1140],
+  ["v4-license-powerpoint-modern.png", "Licensed add-in activation in PowerPoint · PRO", "A modern activation form running directly in PowerPoint with device code, license code entry, copy and activate actions.", 1920, 1140],
+  ["v4-license-word-success.png", "License validation in Word · PRO", "A real Word add-in reporting that its license is valid and activated through the modern dialog system.", 1920, 1140],
+  ["v4-license-excel-classic.png", "Classic VBA license form in Excel", "A native VBA/MSForms activation form running in Excel, demonstrating the classic UserForm workflow supported by the visual designer.", 1920, 1140],
+  ["v4-create-installer-dialog.png", "Create Installer workflow · PRO", "Ribbon UI Studio prepares the add-in deployment configuration, including product metadata, icon and optional VBA obfuscation. InstallerLab must be installed to generate the Windows package.", 1918, 1200],
+  ["v4-installer-running.png", "Generated Windows installer", "A Windows installer generated from the deployment workflow. EXE, MSI and Bundle generation requires InstallerLab.", 952, 663],
+  ["v4-office-icon-gallery.png", "Office imageMso icon gallery", "Browse and filter Office icons visually instead of memorizing imageMso names, then use the selected icon in the Ribbon design.", 1918, 1200]
 ] as const;
 
 const screenshotsEs = [
-  ["v4-ribbon-visual-designer.png", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con una vista previa nítida, árbol de estructura y panel de propiedades.", 1475, 875],
-  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Crea y edita visualmente UserForms VBA/MSForms nativos. Este formulario real de activación demuestra que los formularios normales están disponibles tanto en Community como en PRO.", 1475, 950],
+  ["v4-ribbon-visual-designer.png", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con vista previa estilo Office, árbol de estructura y editor de propiedades.", 1475, 875],
+  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Crea y edita visualmente UserForms VBA/MSForms nativos. Este formulario de activación también demuestra que los UserForms clásicos están disponibles en Community.", 1475, 950],
   ["v4-modern-forms-designer.png", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime. Modern Forms es exclusivo de PRO.", 1475, 950],
-  ["v4-pro-license-tools.png", "Licenciamiento de add-ins · PRO", "Ribbon UI Studio PRO incluye License Generator, Inject Validator y Remove Validator para agregar o quitar licenciamiento a los complementos de Office.", 1440, 981],
-  ["v4-littleapi-connection-excel.png", "Modern Form ejecutándose en Excel · PRO", "Un formulario real de conexión de LittleAPI ejecutándose dentro de Excel, mostrando el runtime de Modern Forms en un flujo real de un add-in de Office.", 1920, 1140]
+  ["v4-pro-license-tools.png", "Herramientas de licenciamiento · PRO", "License Generator, Inject Validator y Remove Validator permiten agregar licenciamiento a un add-in de Office o retirarlo posteriormente.", 1440, 981],
+  ["v4-littleapi-not-configured.png", "Diálogo moderno de advertencia en Excel · PRO", "Un diálogo moderno real ejecutándose dentro de Excel. El ejemplo LittleAPI muestra cómo un add-in puede guiar al usuario cuando falta configuración.", 1920, 1140],
+  ["v4-littleapi-connection-form.png", "Modern Form ejecutándose en Excel · PRO", "Un formulario real de conexión de LittleAPI ejecutándose dentro de Excel, mostrando el runtime de Modern Forms en un flujo real de un add-in de Office.", 1920, 1140],
+  ["v4-littleapi-connection-success.png", "Diálogo moderno de información en Excel · PRO", "Mensaje real de conexión correcta mostrado por un add-in de Office mediante el runtime de diálogos modernos.", 1920, 1140],
+  ["v4-littleapi-reload-confirm.png", "Diálogo moderno de confirmación en Excel · PRO", "Flujo de confirmación Sí/No ejecutándose dentro de Excel y demostrando un diálogo moderno compatible con VBA.", 1920, 1140],
+  ["v4-license-powerpoint-modern.png", "Activación de add-in en PowerPoint · PRO", "Formulario moderno de activación ejecutándose directamente en PowerPoint con código de dispositivo, licencia, copiar y activar.", 1920, 1140],
+  ["v4-license-word-success.png", "Validación de licencia en Word · PRO", "Un add-in real de Word informando que la licencia es válida y está activada mediante el sistema de diálogos modernos.", 1920, 1140],
+  ["v4-license-excel-classic.png", "Formulario clásico de licencia VBA en Excel", "Un UserForm VBA/MSForms nativo ejecutándose en Excel y demostrando el flujo clásico soportado por el diseñador visual.", 1920, 1140],
+  ["v4-create-installer-dialog.png", "Flujo Create Installer · PRO", "Ribbon UI Studio prepara la configuración de distribución del add-in, incluidos metadatos, icono y ofuscación VBA opcional. InstallerLab debe estar instalado para generar el paquete de Windows.", 1918, 1200],
+  ["v4-installer-running.png", "Instalador de Windows generado", "Un instalador de Windows generado desde el flujo de distribución. La generación EXE, MSI y Bundle requiere InstallerLab.", 952, 663],
+  ["v4-office-icon-gallery.png", "Galería de iconos Office imageMso", "Busca y filtra visualmente iconos de Office sin memorizar nombres imageMso y utiliza el icono seleccionado en el diseño Ribbon.", 1918, 1200]
 ] as const;
 
 export function V4HomeSections({ lang, siteBase }: V4Props) {
@@ -33,13 +51,13 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
         </div>
         <a
           className="v4-showcase-image"
-          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-png1`}
+          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-original4`}
           target="_blank"
           rel="noreferrer"
           title={es ? "Abrir imagen a resolución completa" : "Open full-resolution image"}
         >
           <img
-            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-png1`}
+            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-original4`}
             alt="Ribbon UI Studio v4 Ribbon Visual Designer"
             width={1475}
             height={875}
@@ -143,7 +161,7 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
       </div>
       <div className="v4-doc-gallery">
         {shots.map(([file,title,body,width,height], index) => {
-          const src = `${siteBase}/screenshots/${file}?v=20261009-png1`;
+          const src = `${siteBase}/screenshots/${file}?v=20261009-original4`;
           return (
             <figure key={file}>
               <a
