@@ -1,23 +1,17 @@
 type V4Props = { lang: string; siteBase: string };
 
 const screenshots = [
-  ["v4-ribbon-visual-designer.webp", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a live Office-style preview, structure tree and properties.", 1475, 875],
-  ["v4-vba-userform-designer.webp", "VBA UserForm Designer", "Create and edit classic native VBA/MSForms UserForms visually. Available in Community and PRO.", 1475, 950],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview.", 1475, 950],
-  ["v4-modern-form-word.webp", "Modern Form running in Word · PRO", "A real Modern Form running from an Office solution rather than a static mock-up.", 1918, 1200],
-  ["v4-modern-calendar.webp", "Modern Calendar · PRO", "Modern Forms include date and calendar controls, including single-date and range workflows.", 845, 647],
-  ["v4-littleapi-excel-connection.webp", "Real Excel add-in example", "LittleAPI demonstrates a real add-in workflow built with Ribbon UI Studio: Ribbon UI, VBA and external API integration.", 1918, 1200],
-  ["v4-littleapi-modern-dialog.webp", "Modern VBA-compatible dialog · PRO", "Modern message dialogs can replace common VBA MsgBox flows while preserving familiar result semantics.", 1918, 1200]
+  ["v4-ribbon-visual-designer.webp", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a sharp live Office-style preview, structure tree and properties.", 1475, 875],
+  ["v4-vba-userform-designer.webp", "VBA UserForm Designer · Community + PRO", "Create and edit native VBA/MSForms UserForms visually. This real license-activation form shows that classic UserForms are available in Community as well as PRO.", 1475, 950],
+  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview. Modern Forms are exclusive to PRO.", 1475, 950],
+  ["v4-pro-license-tools.webp", "Add-in Licensing · PRO", "Ribbon UI Studio PRO includes License Generator, Inject Validator and Remove Validator tools so licensing can be added to or removed from Office add-ins.", 1440, 981]
 ] as const;
 
 const screenshotsEs = [
-  ["v4-ribbon-visual-designer.webp", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con vista previa, árbol de estructura y panel de propiedades.", 1475, 875],
-  ["v4-vba-userform-designer.webp", "Diseñador de VBA UserForms", "Crea y edita visualmente formularios VBA/MSForms nativos. Disponible en Community y PRO.", 1475, 950],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime.", 1475, 950],
-  ["v4-modern-form-word.webp", "Modern Form ejecutándose en Word · PRO", "Un Modern Form real ejecutándose desde una solución Office, no una simple maqueta.", 1918, 1200],
-  ["v4-modern-calendar.webp", "Calendario moderno · PRO", "Modern Forms incluye controles Date y Calendar, con selección de una fecha o de un rango.", 845, 647],
-  ["v4-littleapi-excel-connection.webp", "Ejemplo real de add-in para Excel", "LittleAPI muestra un caso real construido con Ribbon UI Studio: Ribbon, VBA e integración con una API externa.", 1918, 1200],
-  ["v4-littleapi-modern-dialog.webp", "Diálogo moderno compatible con VBA · PRO", "Los diálogos modernos pueden sustituir flujos habituales de MsgBox conservando una semántica familiar para VBA.", 1918, 1200]
+  ["v4-ribbon-visual-designer.webp", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con una vista previa nítida, árbol de estructura y panel de propiedades.", 1475, 875],
+  ["v4-vba-userform-designer.webp", "VBA UserForm Designer · Community + PRO", "Crea y edita visualmente UserForms VBA/MSForms nativos. Este formulario real de activación demuestra que los formularios normales están disponibles tanto en Community como en PRO.", 1475, 950],
+  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime. Modern Forms es exclusivo de PRO.", 1475, 950],
+  ["v4-pro-license-tools.webp", "Licenciamiento de add-ins · PRO", "Ribbon UI Studio PRO incluye License Generator, Inject Validator y Remove Validator para agregar o quitar licenciamiento a los complementos de Office.", 1440, 981]
 ] as const;
 
 export function V4HomeSections({ lang, siteBase }: V4Props) {
@@ -37,13 +31,13 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
         </div>
         <a
           className="v4-showcase-image"
-          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`}
+          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp?v=20261009-hq2`}
           target="_blank"
           rel="noreferrer"
           title={es ? "Abrir imagen a resolución completa" : "Open full-resolution image"}
         >
           <img
-            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`}
+            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp?v=20261009-hq2`}
             alt="Ribbon UI Studio v4 Ribbon Visual Designer"
             width={1475}
             height={875}
@@ -139,14 +133,15 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
       </div>
 
       <div className="v4-gallery-heading">
-        <h3>{es ? "Capturas de v4 en alta resolución" : "v4 screenshots in high resolution"}</h3>
+        <p className="v4-eyebrow">{es ? "Interfaz real de v4" : "Real v4 interface"}</p>
+        <h3>{es ? "La documentación visual, paso a paso" : "Visual documentation, step by step"}</h3>
         <p>{es
-          ? "Las imágenes se muestran a mayor tamaño para que puedas leer la interfaz. Haz clic en cualquier captura para abrir el archivo a resolución completa."
-          : "Screenshots are displayed larger so the interface remains readable. Click any image to open the full-resolution file."}</p>
+          ? "Estas capturas proceden directamente de Ribbon UI Studio v4 y se publican sin compresión con pérdida. Cada imagen corresponde a una función concreta de Community o PRO. Haz clic para verla a resolución completa."
+          : "These screenshots come directly from Ribbon UI Studio v4 and are published without lossy compression. Each image documents a specific Community or PRO capability. Click to view it at full resolution."}</p>
       </div>
       <div className="v4-doc-gallery">
         {shots.map(([file,title,body,width,height], index) => {
-          const src = `${siteBase}/screenshots/${file}`;
+          const src = `${siteBase}/screenshots/${file}?v=20261009-hq2`;
           return (
             <figure key={file}>
               <a
