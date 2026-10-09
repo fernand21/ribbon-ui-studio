@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./docs.module.css";
 import { docsCopy, languages, type Lang } from "./docs-i18n";
+import { V4Documentation } from "../v4-content";
 
 const siteBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const sectionIds = ["overview","quick-start","office-files","xml-editor","preview","vba","images","addins","packaging","comparison","troubleshooting","reference"] as const;
@@ -15,7 +16,7 @@ const sectionKeywords = [
   "vba module callback macros generate edit rename remove",
   "imagemso icon png custom images gallery",
   "xlam dotm ppam excel word powerpoint addin",
-  "installer inno setup 6 package exe obfuscation",
+  "installer installerlab package exe msi bundle pro obfuscation",
   "office ribbonx editor custom ui editor visual studio vsto comparison",
   "office access vbom macros save backup errors",
   "microsoft github reference links"
@@ -116,7 +117,7 @@ export default function DocsClient() {
         </div>
       </section>
 
-      <div className={styles.trustStrip}><span>Ribbon UI Studio</span><b>Excel</b><b>Word</b><b>PowerPoint</b><b>Office Open XML</b><b>Inno Setup 6</b></div>
+      <div className={styles.trustStrip}><span>Ribbon UI Studio v4</span><b>Excel</b><b>Word</b><b>PowerPoint</b><b>Office Open XML</b><b>InstallerLab deployment</b></div>
 
       <div className={styles.shell}>
         <aside className={styles.sidebar}>
@@ -131,6 +132,7 @@ export default function DocsClient() {
         </aside>
 
         <div className={styles.content}>
+          <V4Documentation lang={lang} siteBase={siteBase} />
           <section className={styles.stats}>
             <div><strong>3</strong><span>{t.stats[0]}</span></div>
             <div><strong>2</strong><span>{t.stats[1]}</span></div>
@@ -217,7 +219,7 @@ export default function DocsClient() {
             </div>
           </article>
 
-          <footer className={styles.footer}><div><strong>Ribbon UI Studio</strong><span>v3.2</span></div><p>{t.independent}</p></footer>
+          <footer className={styles.footer}><div><strong>Ribbon UI Studio</strong><span>v4.0.0</span></div><p>{t.independent}</p></footer>
         </div>
       </div>
     </main>
