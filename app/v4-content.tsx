@@ -1,17 +1,19 @@
 type V4Props = { lang: string; siteBase: string };
 
 const screenshots = [
-  ["v4-ribbon-visual-designer.webp", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a sharp live Office-style preview, structure tree and properties.", 1475, 875],
-  ["v4-vba-userform-designer.webp", "VBA UserForm Designer · Community + PRO", "Create and edit native VBA/MSForms UserForms visually. This real license-activation form shows that classic UserForms are available in Community as well as PRO.", 1475, 950],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview. Modern Forms are exclusive to PRO.", 1475, 950],
-  ["v4-pro-license-tools.webp", "Add-in Licensing · PRO", "Ribbon UI Studio PRO includes License Generator, Inject Validator and Remove Validator tools so licensing can be added to or removed from Office add-ins.", 1440, 981]
+  ["v4-ribbon-visual-designer.png", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a sharp live Office-style preview, structure tree and properties.", 1475, 875],
+  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Create and edit native VBA/MSForms UserForms visually. This real license-activation form shows that classic UserForms are available in Community as well as PRO.", 1475, 950],
+  ["v4-modern-forms-designer.png", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview. Modern Forms are exclusive to PRO.", 1475, 950],
+  ["v4-pro-license-tools.png", "Add-in Licensing · PRO", "Ribbon UI Studio PRO includes License Generator, Inject Validator and Remove Validator tools so licensing can be added to or removed from Office add-ins.", 1440, 981],
+  ["v4-littleapi-connection-excel.png", "Modern Form running in Excel · PRO", "A real LittleAPI connection form running inside Excel, showing the Modern Forms runtime in an actual Office add-in workflow.", 1920, 1140]
 ] as const;
 
 const screenshotsEs = [
-  ["v4-ribbon-visual-designer.webp", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con una vista previa nítida, árbol de estructura y panel de propiedades.", 1475, 875],
-  ["v4-vba-userform-designer.webp", "VBA UserForm Designer · Community + PRO", "Crea y edita visualmente UserForms VBA/MSForms nativos. Este formulario real de activación demuestra que los formularios normales están disponibles tanto en Community como en PRO.", 1475, 950],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime. Modern Forms es exclusivo de PRO.", 1475, 950],
-  ["v4-pro-license-tools.webp", "Licenciamiento de add-ins · PRO", "Ribbon UI Studio PRO incluye License Generator, Inject Validator y Remove Validator para agregar o quitar licenciamiento a los complementos de Office.", 1440, 981]
+  ["v4-ribbon-visual-designer.png", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con una vista previa nítida, árbol de estructura y panel de propiedades.", 1475, 875],
+  ["v4-vba-userform-designer.png", "VBA UserForm Designer · Community + PRO", "Crea y edita visualmente UserForms VBA/MSForms nativos. Este formulario real de activación demuestra que los formularios normales están disponibles tanto en Community como en PRO.", 1475, 950],
+  ["v4-modern-forms-designer.png", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime. Modern Forms es exclusivo de PRO.", 1475, 950],
+  ["v4-pro-license-tools.png", "Licenciamiento de add-ins · PRO", "Ribbon UI Studio PRO incluye License Generator, Inject Validator y Remove Validator para agregar o quitar licenciamiento a los complementos de Office.", 1440, 981],
+  ["v4-littleapi-connection-excel.png", "Modern Form ejecutándose en Excel · PRO", "Un formulario real de conexión de LittleAPI ejecutándose dentro de Excel, mostrando el runtime de Modern Forms en un flujo real de un add-in de Office.", 1920, 1140]
 ] as const;
 
 export function V4HomeSections({ lang, siteBase }: V4Props) {
@@ -31,13 +33,13 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
         </div>
         <a
           className="v4-showcase-image"
-          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp?v=20261009-hq2`}
+          href={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-png1`}
           target="_blank"
           rel="noreferrer"
           title={es ? "Abrir imagen a resolución completa" : "Open full-resolution image"}
         >
           <img
-            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp?v=20261009-hq2`}
+            src={`${siteBase}/screenshots/v4-ribbon-visual-designer.png?v=20261009-png1`}
             alt="Ribbon UI Studio v4 Ribbon Visual Designer"
             width={1475}
             height={875}
@@ -141,7 +143,7 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
       </div>
       <div className="v4-doc-gallery">
         {shots.map(([file,title,body,width,height], index) => {
-          const src = `${siteBase}/screenshots/${file}?v=20261009-hq2`;
+          const src = `${siteBase}/screenshots/${file}?v=20261009-png1`;
           return (
             <figure key={file}>
               <a
