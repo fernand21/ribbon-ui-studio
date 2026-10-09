@@ -1,23 +1,23 @@
 type V4Props = { lang: string; siteBase: string };
 
 const screenshots = [
-  ["v4-ribbon-visual-designer.webp", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a live Office-style preview, structure tree and properties."],
-  ["v4-vba-userform-designer.webp", "VBA UserForm Designer", "Create and edit classic native VBA/MSForms UserForms visually. Available in Community and PRO."],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview."],
-  ["v4-modern-form-word.webp", "Modern Form running in Word · PRO", "A real Modern Form running from an Office solution rather than a static mock-up."],
-  ["v4-modern-calendar.webp", "Modern Calendar · PRO", "Modern Forms include date and calendar controls, including single-date and range workflows."],
-  ["v4-littleapi-excel-connection.webp", "Real Excel add-in example", "LittleAPI demonstrates a real add-in workflow built with Ribbon UI Studio: Ribbon UI, VBA and external API integration."],
-  ["v4-littleapi-modern-dialog.webp", "Modern VBA-compatible dialog · PRO", "Modern message dialogs can replace common VBA MsgBox flows while preserving familiar result semantics."]
+  ["v4-ribbon-visual-designer.webp", "Ribbon Visual Designer", "Design RibbonX tabs, groups and controls with a live Office-style preview, structure tree and properties.", 1475, 875],
+  ["v4-vba-userform-designer.webp", "VBA UserForm Designer", "Create and edit classic native VBA/MSForms UserForms visually. Available in Community and PRO.", 1475, 950],
+  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Build modern JSON-based forms with themes, validation, drag/resize controls and runtime preview.", 1475, 950],
+  ["v4-modern-form-word.webp", "Modern Form running in Word · PRO", "A real Modern Form running from an Office solution rather than a static mock-up.", 1918, 1200],
+  ["v4-modern-calendar.webp", "Modern Calendar · PRO", "Modern Forms include date and calendar controls, including single-date and range workflows.", 845, 647],
+  ["v4-littleapi-excel-connection.webp", "Real Excel add-in example", "LittleAPI demonstrates a real add-in workflow built with Ribbon UI Studio: Ribbon UI, VBA and external API integration.", 1918, 1200],
+  ["v4-littleapi-modern-dialog.webp", "Modern VBA-compatible dialog · PRO", "Modern message dialogs can replace common VBA MsgBox flows while preserving familiar result semantics.", 1918, 1200]
 ] as const;
 
 const screenshotsEs = [
-  ["v4-ribbon-visual-designer.webp", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con vista previa, árbol de estructura y panel de propiedades."],
-  ["v4-vba-userform-designer.webp", "Diseñador de VBA UserForms", "Crea y edita visualmente formularios VBA/MSForms nativos. Disponible en Community y PRO."],
-  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime."],
-  ["v4-modern-form-word.webp", "Modern Form ejecutándose en Word · PRO", "Un Modern Form real ejecutándose desde una solución Office, no una simple maqueta."],
-  ["v4-modern-calendar.webp", "Calendario moderno · PRO", "Modern Forms incluye controles Date y Calendar, con selección de una fecha o de un rango."],
-  ["v4-littleapi-excel-connection.webp", "Ejemplo real de add-in para Excel", "LittleAPI muestra un caso real construido con Ribbon UI Studio: Ribbon, VBA e integración con una API externa."],
-  ["v4-littleapi-modern-dialog.webp", "Diálogo moderno compatible con VBA · PRO", "Los diálogos modernos pueden sustituir flujos habituales de MsgBox conservando una semántica familiar para VBA."]
+  ["v4-ribbon-visual-designer.webp", "Diseñador visual de Ribbon", "Diseña pestañas, grupos y controles RibbonX con vista previa, árbol de estructura y panel de propiedades.", 1475, 875],
+  ["v4-vba-userform-designer.webp", "Diseñador de VBA UserForms", "Crea y edita visualmente formularios VBA/MSForms nativos. Disponible en Community y PRO.", 1475, 950],
+  ["v4-modern-forms-designer.webp", "Modern Forms Designer · PRO", "Crea formularios modernos basados en JSON con temas, validación, drag/resize y vista previa del runtime.", 1475, 950],
+  ["v4-modern-form-word.webp", "Modern Form ejecutándose en Word · PRO", "Un Modern Form real ejecutándose desde una solución Office, no una simple maqueta.", 1918, 1200],
+  ["v4-modern-calendar.webp", "Calendario moderno · PRO", "Modern Forms incluye controles Date y Calendar, con selección de una fecha o de un rango.", 845, 647],
+  ["v4-littleapi-excel-connection.webp", "Ejemplo real de add-in para Excel", "LittleAPI muestra un caso real construido con Ribbon UI Studio: Ribbon, VBA e integración con una API externa.", 1918, 1200],
+  ["v4-littleapi-modern-dialog.webp", "Diálogo moderno compatible con VBA · PRO", "Los diálogos modernos pueden sustituir flujos habituales de MsgBox conservando una semántica familiar para VBA.", 1918, 1200]
 ] as const;
 
 export function V4HomeSections({ lang, siteBase }: V4Props) {
@@ -45,6 +45,8 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
           <img
             src={`${siteBase}/screenshots/v4-ribbon-visual-designer.webp`}
             alt="Ribbon UI Studio v4 Ribbon Visual Designer"
+            width={1475}
+            height={875}
             loading="eager"
             decoding="async"
           />
@@ -143,7 +145,7 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
           : "Screenshots are displayed larger so the interface remains readable. Click any image to open the full-resolution file."}</p>
       </div>
       <div className="v4-doc-gallery">
-        {shots.map(([file,title,body], index) => {
+        {shots.map(([file,title,body,width,height], index) => {
           const src = `${siteBase}/screenshots/${file}`;
           return (
             <figure key={file}>
@@ -157,6 +159,8 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
                 <img
                   src={src}
                   alt={title}
+                  width={width}
+                  height={height}
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
                 />
