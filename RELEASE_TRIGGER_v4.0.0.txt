@@ -1,0 +1,1 @@
+Create Ribbon UI Studio v4.0.0 as a draft release. Binary assets will be uploaded manually before publication.
