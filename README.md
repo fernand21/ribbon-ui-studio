@@ -1,62 +1,78 @@
-# Ribbon UI Studio
+# Ribbon UI Studio v4.0.0
 
-**Free RibbonX and Microsoft Office Custom UI editor for Windows.**
+**Visual Office add-in studio for RibbonX, VBA, classic UserForms and modern Office UI workflows.**
 
-Ribbon UI Studio helps developers design and edit custom Microsoft Office ribbons with RibbonX/customUI XML and VBA in one workspace. It supports Excel, Word and PowerPoint add-ins, VBA callback generation and diagnostics, imageMso browsing, Office-aware previews, and Windows installer packaging.
+Ribbon UI Studio helps developers build and maintain Microsoft Office add-ins for Excel, Word and PowerPoint from one Windows desktop workspace.
 
-It is especially useful if you are searching for a modern workflow around terms such as **RibbonX editor**, **Office Ribbon Editor**, **Custom UI Editor alternative**, **Ribbon XML editor**, **Excel Ribbon Designer**, **VBA Ribbon Editor**, **Office Add-in Creator**, or **imageMso Browser**.
+Version 4 adds a visual Ribbon designer, a native VBA UserForm designer and a separate PRO-only Modern Forms system, while retaining the RibbonX/XML, VBA, callback, imageMso and diagnostics workflows from the v3 line.
 
 ## Website
 
-Official site and free downloads:
+Official site and downloads:
 
 https://fernand21.github.io/ribbon-ui-studio/
 
-The application is proprietary software distributed free of charge. The application source code remains private; this repository contains the public website and release/distribution resources.
+## v4 highlights
 
-## Main capabilities
+- Ribbon Visual Designer with live preview, structure tree, toolbox and properties
+- Native VBA UserForm Designer for classic MSForms/VBA forms
+- RibbonX / customUI XML editing with Monaco
+- VBA module editing and callback generation
+- imageMso browser and custom icon workflow
+- Ribbon diagnostics and XML validation
+- Excel `.xlam`, Word `.dotm` and PowerPoint `.ppam` workflows
+- Modern Forms Designer and runtime in PRO
+- Modern VBA-compatible dialogs in PRO
+- Add or remove licensing from Office add-ins in PRO
+- InstallerLab-based Windows deployment workflow
 
-- Edit RibbonX / `customUI` XML for Microsoft Office
-- Create and maintain Excel `.xlam`, Word `.dotm` and PowerPoint `.ppam` add-ins
-- Generate VBA callback signatures required by RibbonX controls
-- Diagnose missing callbacks, duplicate IDs and invalid RibbonX structures
-- Browse built-in Office `imageMso` icons and manage custom images
-- Preview Office-specific ribbon layouts
-- Read and edit VBA modules from supported Office files
-- Package add-ins with Windows installers
-- Use installer or portable builds of Ribbon UI Studio
+## Community vs PRO
 
-## Downloads and releases
+| Capability | Community | PRO |
+|---|:---:|:---:|
+| RibbonX / VBA editing | ✅ | ✅ |
+| Ribbon Visual Designer | ✅ | ✅ |
+| Native VBA UserForm Designer | ✅ | ✅ |
+| imageMso / callback generation / diagnostics | ✅ | ✅ |
+| Modern Forms Designer + runtime | — | ✅ |
+| Modern VBA-compatible dialogs | — | ✅ |
+| Add licensing to add-ins | — | ✅ |
+| Remove add-in licensing | — | ✅ |
+| Advanced packaging / protected distribution | — | ✅ |
 
-The website reads the current public version, release date, asset names, asset sizes, direct download links and download counters directly from GitHub Releases. Publishing a new public GitHub Release updates the visible release information without manually editing the download page.
+Classic VBA UserForms and Modern Forms are two different systems. Community includes the visual designer for normal native VBA/MSForms UserForms. Modern Forms are exclusive to PRO.
 
-Releases:
+## EXE / MSI / Bundle deployment requires InstallerLab
+
+Ribbon UI Studio prepares the Office add-in and its deployment project, but **InstallerLab must be installed to convert/package the add-in as EXE, MSI or Bundle**.
+
+InstallerLab:
+
+https://installerlab.website/
+
+This dependency is intentionally documented separately because Ribbon UI Studio is the add-in design environment while InstallerLab is the Windows packaging application.
+
+## Real-world example
+
+The v4 documentation includes a LittleAPI Excel add-in as a real-world example of what can be built with Ribbon UI Studio: Ribbon UI, VBA, modern forms/dialogs and an external REST API working together.
+
+LittleAPI is shown as an example solution; it is not a required built-in dependency of Ribbon UI Studio.
+
+## Releases
+
 https://github.com/fernand21/ribbon-ui-studio/releases
 
-## Discovery pages
+The website reads release/version/download information from GitHub Releases.
 
-- RibbonX Editor: https://fernand21.github.io/ribbon-ui-studio/ribbonx-editor/
-- Custom UI Editor alternative: https://fernand21.github.io/ribbon-ui-studio/custom-ui-editor-alternative/
-- Excel Ribbon Designer: https://fernand21.github.io/ribbon-ui-studio/excel-ribbon-designer/
-- Office Add-in Creator: https://fernand21.github.io/ribbon-ui-studio/office-addin-creator/
-- imageMso Browser: https://fernand21.github.io/ribbon-ui-studio/imagemso-browser/
+## Documentation
 
-## Site structure
+https://fernand21.github.io/ribbon-ui-studio/docs/
 
-- Product overview and latest-release download
-- Installer and portable download cards populated from GitHub Releases
-- Documentation and complete workflow guide
-- Real product screenshots and Office-specific previews
-- Version history populated from GitHub Releases
-- GitHub Issues feedback and support links
+## Source and distribution
 
-All distribution links point to the canonical repository at `fernand21/ribbon-ui-studio`.
+Ribbon UI Studio is proprietary software. This repository contains the public website and release/distribution resources; the application source remains private.
 
-## Software status
-
-This repository contains the distribution website only. Publishing this website does not publish or grant rights to the Ribbon UI Studio application source code. Application binaries are distributed separately through GitHub Releases.
-
-## Local development
+## Local website development
 
 ```bash
 npm run dev
@@ -68,16 +84,4 @@ npm run dev
 npm run build
 ```
 
-The project uses vinext and is deployed automatically through GitHub Pages.
-
-## Branding and URL migration
-
-The product is branded **Ribbon UI Studio** and the canonical GitHub Pages URL is:
-
-`https://fernand21.github.io/ribbon-ui-studio/`
-
-The previous project path was:
-
-`https://fernand21.github.io/office-ribbon-editor/`
-
-The manifest, sitemap, canonical metadata, repository links and GitHub Pages base path use the current `ribbon-ui-studio` path.
+The website is deployed through GitHub Pages.
