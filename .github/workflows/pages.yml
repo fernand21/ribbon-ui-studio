@@ -27,6 +27,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Restore full-resolution v4 screenshots
+        run: |
+          mkdir -p public/screenshots
+          cat .image-src/v4/v4-create-installer-dialog/*.b64 | base64 -d > public/screenshots/v4-create-installer-dialog.png
+          cat .image-src/v4/v4-office-icon-gallery/*.b64 | base64 -d > public/screenshots/v4-office-icon-gallery.png
+          test "$(stat -c%s public/screenshots/v4-create-installer-dialog.png)" = "1772387"
+          test "$(stat -c%s public/screenshots/v4-office-icon-gallery.png)" = "1714654"
       - run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: /ribbon-ui-studio
