@@ -99,11 +99,13 @@ This gives developers a direct path from add-in creation to controlled distribut
 
 ## InstallerLab packaging integration
 
-Ribbon UI Studio v4 integrates with InstallerLab as the primary Office add-in packaging path when InstallerLab is available.
+Ribbon UI Studio v4 uses InstallerLab for Windows package generation.
 
-The packaging workflow can prepare a temporary InstallerLab OfficeAddin project, validate it through InstallerLab CLI and build the deployment output while keeping the original add-in unchanged when staging or protection is required.
+To convert/package an Office add-in as EXE, MSI or Bundle, **InstallerLab must be installed separately**. Ribbon UI Studio prepares the temporary OfficeAddin project and deployment data; InstallerLab validates and generates the Windows package while the original add-in remains unchanged when staging or protection is required.
 
 For Modern Forms add-ins, the packaging workflow includes the required Modern Forms runtime/bridge components. Modern Forms are intended for installed deployments rather than a manually copied loose add-in.
+
+InstallerLab: https://installerlab.website/
 
 ## Community and PRO
 
