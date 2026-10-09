@@ -12,8 +12,8 @@ const screenshots = [
   ["v4-license-powerpoint-modern.png", "Licensed add-in activation in PowerPoint · PRO", "A modern activation form running directly in PowerPoint with device code, license code entry, copy and activate actions.", 1920, 1140],
   ["v4-license-word-success.png", "License validation in Word · PRO", "A real Word add-in reporting that its license is valid and activated through the modern dialog system.", 1920, 1140],
   ["v4-license-excel-classic.png", "Classic VBA license form in Excel", "A native VBA/MSForms activation form running in Excel, demonstrating the classic UserForm workflow supported by the visual designer.", 1920, 1140],
-  ["v4-create-installer-dialog.png", "Create Installer workflow · PRO", "Ribbon UI Studio prepares the add-in deployment configuration, including product metadata, icon and optional VBA obfuscation. InstallerLab must be installed to generate the Windows package.", 1918, 1200],
-  ["v4-installer-running.png", "Generated Windows installer", "A Windows installer generated from the deployment workflow. EXE, MSI and Bundle generation requires InstallerLab.", 952, 663],
+  ["v4-create-installer-dialog.png", "Create Installer workflow · PRO", "Ribbon UI Studio prepares the add-in deployment configuration, including product metadata, icon and optional VBA obfuscation. InstallerLab must be installed to generate the Bundle Installer.", 1918, 1200],
+  ["v4-installer-running.png", "Generated Bundle Installer", "A Bundle Installer generated from the deployment workflow. Bundle Installer generation requires InstallerLab.", 952, 663],
   ["v4-office-icon-gallery.png", "Office imageMso icon gallery", "Browse and filter Office icons visually instead of memorizing imageMso names, then use the selected icon in the Ribbon design.", 1918, 1200]
 ] as const;
 
@@ -29,8 +29,8 @@ const screenshotsEs = [
   ["v4-license-powerpoint-modern.png", "Activación de add-in en PowerPoint · PRO", "Formulario moderno de activación ejecutándose directamente en PowerPoint con código de dispositivo, licencia, copiar y activar.", 1920, 1140],
   ["v4-license-word-success.png", "Validación de licencia en Word · PRO", "Un add-in real de Word informando que la licencia es válida y está activada mediante el sistema de diálogos modernos.", 1920, 1140],
   ["v4-license-excel-classic.png", "Formulario clásico de licencia VBA en Excel", "Un UserForm VBA/MSForms nativo ejecutándose en Excel y demostrando el flujo clásico soportado por el diseñador visual.", 1920, 1140],
-  ["v4-create-installer-dialog.png", "Flujo Create Installer · PRO", "Ribbon UI Studio prepara la configuración de distribución del add-in, incluidos metadatos, icono y ofuscación VBA opcional. InstallerLab debe estar instalado para generar el paquete de Windows.", 1918, 1200],
-  ["v4-installer-running.png", "Instalador de Windows generado", "Un instalador de Windows generado desde el flujo de distribución. La generación EXE, MSI y Bundle requiere InstallerLab.", 952, 663],
+  ["v4-create-installer-dialog.png", "Flujo Create Installer · PRO", "Ribbon UI Studio prepara la configuración de distribución del add-in, incluidos metadatos, icono y ofuscación VBA opcional. InstallerLab debe estar instalado para generar el Bundle Installer.", 1918, 1200],
+  ["v4-installer-running.png", "Bundle Installer generado", "Un Bundle Installer generado desde el flujo de distribución. La generación del Bundle Installer requiere InstallerLab.", 952, 663],
   ["v4-office-icon-gallery.png", "Galería de iconos Office imageMso", "Busca y filtra visualmente iconos de Office sin memorizar nombres imageMso y utiliza el icono seleccionado en el diseño Ribbon.", 1918, 1200]
 ] as const;
 
@@ -102,10 +102,10 @@ export function V4HomeSections({ lang, siteBase }: V4Props) {
           </article>
         </div>
         <div className="v4-installerlab-note">
-          <strong>InstallerLab required for EXE / MSI / Bundle</strong>
+          <strong>InstallerLab required for Bundle Installer</strong>
           <p>{es
-            ? "Para convertir y distribuir un add-in como EXE, MSI o Bundle debes instalar InstallerLab. Ribbon UI Studio prepara el proyecto del complemento y utiliza InstallerLab para generar el paquete de Windows."
-            : "To convert and distribute an add-in as EXE, MSI or Bundle, InstallerLab must be installed. Ribbon UI Studio prepares the add-in project and uses InstallerLab to generate the Windows package."}</p>
+            ? "Para generar el Bundle Installer de un add-in debes instalar InstallerLab. Ribbon UI Studio prepara el proyecto del complemento y utiliza InstallerLab para crear el Bundle Installer."
+            : "To generate the Bundle Installer for an add-in, InstallerLab must be installed. Ribbon UI Studio prepares the add-in project and uses InstallerLab to create the Bundle Installer."}</p>
           <a href="https://installerlab.website/" target="_blank" rel="noreferrer">installerlab.website ↗</a>
         </div>
       </section>
@@ -132,7 +132,7 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
         <article><h3>✨ Modern Forms · PRO</h3><p>{es ? "Sistema separado basado en JSON y runtime propio. Incluye TextBox, ComboBox, CheckBox, Date, Calendar, File/Folder, Label, Image y Button, además de temas, escala y elevación." : "Separate JSON-based system with its own runtime. Includes TextBox, ComboBox, CheckBox, Date, Calendar, File/Folder, Label, Image and Button plus themes, scale and elevation."}</p></article>
         <article><h3>💬 Modern MsgBox · PRO</h3><p>{es ? "OER_ModernMsgBox mantiene un flujo compatible con los grupos habituales de botones y resultados de VBA, con fallback al MsgBox nativo cuando el runtime moderno no puede utilizarse." : "OER_ModernMsgBox keeps a VBA-friendly workflow for common button groups and results, with native MsgBox fallback when the modern runtime cannot be used."}</p></article>
         <article><h3>🔐 Add-in Licensing · PRO</h3><p>{es ? "PRO permite agregar protección/licencia a un complemento de Office y también retirar esa licencia cuando ya no sea necesaria. La licencia de Ribbon UI Studio y la licencia insertada en el add-in son independientes." : "PRO can add licensing protection to an Office add-in and remove it again when it is no longer required. Ribbon UI Studio's own license and the license embedded in an add-in are separate."}</p></article>
-        <article><h3>📦 InstallerLab deployment</h3><p>{es ? "La conversión final a EXE, MSI o Bundle requiere tener InstallerLab instalado. Ribbon UI Studio prepara el add-in y el proyecto de distribución; InstallerLab genera el paquete de Windows." : "Final conversion to EXE, MSI or Bundle requires InstallerLab to be installed. Ribbon UI Studio prepares the add-in and deployment project; InstallerLab generates the Windows package."}</p><a href="https://installerlab.website/" target="_blank" rel="noreferrer">InstallerLab ↗</a></article>
+        <article><h3>📦 InstallerLab deployment</h3><p>{es ? "La generación final del Bundle Installer requiere tener InstallerLab instalado. Ribbon UI Studio prepara el add-in y el proyecto de distribución; InstallerLab genera el Bundle Installer." : "Final Bundle Installer generation requires InstallerLab to be installed. Ribbon UI Studio prepares the add-in and deployment project; InstallerLab generates the Bundle Installer."}</p><a href="https://installerlab.website/" target="_blank" rel="noreferrer">InstallerLab ↗</a></article>
       </div>
 
       <div className="v4-matrix-wrap">
@@ -148,8 +148,8 @@ export function V4Documentation({ lang, siteBase }: V4Props) {
           <tr><td>{es ? "Empaquetado avanzado con InstallerLab" : "Advanced packaging with InstallerLab"}</td><td>—</td><td>✓</td></tr>
         </tbody></table>
         <p className="v4-matrix-foot">{es
-          ? "InstallerLab es una aplicación separada y debe instalarse para generar EXE, MSI o Bundle."
-          : "InstallerLab is a separate application and must be installed to generate EXE, MSI or Bundle."} <a href="https://installerlab.website/" target="_blank" rel="noreferrer">installerlab.website ↗</a></p>
+          ? "InstallerLab es una aplicación separada y debe instalarse para generar el Bundle Installer."
+          : "InstallerLab is a separate application and must be installed to generate the Bundle Installer."} <a href="https://installerlab.website/" target="_blank" rel="noreferrer">installerlab.website ↗</a></p>
       </div>
 
       <div className="v4-gallery-heading">
