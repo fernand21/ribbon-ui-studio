@@ -193,7 +193,7 @@ export default function DocsClient() {
 
           <article id="packaging" className={styles.article}>
             <span className={styles.kicker}>{t.packagingKicker}</span><h2>{t.packagingTitle}</h2><p>{t.packagingBody}</p>
-            <div className={styles.innoBox}><span>IS</span><div><strong>Inno Setup 6</strong><p>{t.packagingSafety}</p></div></div>
+            <div className={styles.innoBox}><span>IL</span><div><strong>InstallerLab</strong><p>{t.packagingSafety}</p><p><a href="https://installerlab.website/" target="_blank" rel="noreferrer">installerlab.website ↗</a></p></div></div>
           </article>
 
           <article id="comparison" className={styles.article}>
