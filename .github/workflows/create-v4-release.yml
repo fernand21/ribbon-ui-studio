@@ -1,4 +1,4 @@
-name: Create Ribbon UI Studio v4.0.0 draft release
+name: Sync Ribbon UI Studio v4.0.0 release
 
 on:
   push:
@@ -10,18 +10,20 @@ permissions:
   contents: write
 
 jobs:
-  create-release:
+  sync-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create draft release
+      - name: Create or update v4.0.0 release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view v4.0.0 >/dev/null 2>&1; then
-            echo "Release v4.0.0 already exists; nothing to do."
+            gh release edit v4.0.0 \
+              --title "Ribbon UI Studio v4.0.0 — Visual Office Add-in Studio" \
+              --notes-file RELEASE_NOTES_v4.0.0.md
           else
             gh release create v4.0.0 \
               --target main \
