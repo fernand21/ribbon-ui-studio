@@ -114,9 +114,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           `${siteUrl}screenshots/excel-preview-clean.png`,
           `${siteUrl}screenshots/word-preview-clean.png`,
           `${siteUrl}screenshots/powerpoint-preview-clean.png`,
-          `${siteUrl}screenshots/v4-ribbon-visual-designer.webp`,
-          `${siteUrl}screenshots/v4-vba-userform-designer.webp`,
-          `${siteUrl}screenshots/v4-modern-forms-designer.webp`
+          `${siteUrl}screenshots/v4-ribbon-visual-designer.png`,
+          `${siteUrl}screenshots/v4-vba-userform-designer.png`,
+          `${siteUrl}screenshots/v4-modern-forms-designer.png`
         ],
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
