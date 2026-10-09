@@ -148,8 +148,13 @@ Version 4 keeps the major capabilities introduced in the v3 line, including:
 
 ## Release status
 
-This GitHub release is intentionally being prepared as a **draft**.
+Ribbon UI Studio v4.0.0 is published with the official Windows binaries:
 
-**Binary assets are not attached yet.** The maintainer will upload the final v4.0.0 installer and portable binaries after the corresponding builds have been compiled and verified.
+- `Ribbon.UI.Studio-Setup.exe`
+- `Ribbon.UI.Studio_Portable.exe`
+- `Ribbon_UI_Studio-Setup.msi`
+- `Ribbon_UI_Studio_Bundle.exe`
 
-Do not publish this draft until the binary assets have been uploaded and checked.
+For Office add-in deployment, remember that **InstallerLab is a separate required application** when generating EXE, MSI or Bundle packages.
+
+InstallerLab: https://installerlab.website/
