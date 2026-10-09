@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 const siteUrl = "https://fernand21.github.io/ribbon-ui-studio/";
-const title = "Ribbon UI Studio — Free RibbonX & Office Custom UI Editor for Windows";
-const description = "Free RibbonX editor for Microsoft Office. Design custom ribbons, edit customUI XML, generate VBA callbacks, browse imageMso icons, create Excel, Word and PowerPoint add-ins, and package them for Windows.";
+const title = "Ribbon UI Studio v4.0.0 — Visual RibbonX, VBA UserForms & Modern Forms";
+const description = "Ribbon UI Studio v4 for Microsoft Office: visual Ribbon designer, RibbonX/customUI XML, VBA editing, classic VBA UserForms in Community, PRO Modern Forms and dialogs, add-in licensing, and InstallerLab-based EXE/MSI/Bundle deployment.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     "Office add-in creator",
     "imageMso browser",
     "VBA callback generator",
+    "VBA UserForm designer",
+    "Modern Forms Office",
+    "Office add-in licensing",
+    "InstallerLab",
     "customUI XML",
     "Office RibbonX",
     "Excel add-in",
@@ -98,7 +102,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         alternateName: ["RibbonX Editor", "Office Ribbon Editor"],
         operatingSystem: "Windows 10, Windows 11",
         applicationCategory: "DeveloperApplication",
-        applicationSubCategory: "Microsoft Office RibbonX editor",
+        applicationSubCategory: "Microsoft Office add-in development and RibbonX design",
+        softwareVersion: "4.0.0",
         applicationSuite: "Microsoft Office",
         description,
         url: siteUrl,
@@ -108,7 +113,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           `${siteUrl}screenshots/editor-workspace-clean.png`,
           `${siteUrl}screenshots/excel-preview-clean.png`,
           `${siteUrl}screenshots/word-preview-clean.png`,
-          `${siteUrl}screenshots/powerpoint-preview-clean.png`
+          `${siteUrl}screenshots/powerpoint-preview-clean.png`,
+          `${siteUrl}screenshots/v4-ribbon-visual-designer.webp`,
+          `${siteUrl}screenshots/v4-vba-userform-designer.webp`,
+          `${siteUrl}screenshots/v4-modern-forms-designer.webp`
         ],
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -118,9 +126,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           "VBA callback generation and diagnostics",
           "imageMso icon browsing",
           "Office-aware ribbon previews",
-          "Windows installer packaging for add-ins"
+          "Native VBA UserForm visual design",
+          "PRO Modern Forms and modern dialogs",
+          "PRO add-in licensing management",
+          "InstallerLab-based EXE, MSI and Bundle deployment"
         ],
-        softwareRequirements: "Microsoft Office desktop; Inno Setup 6 is required only to generate add-in installers.",
+        softwareRequirements: "Microsoft Office desktop. InstallerLab must be installed separately to generate EXE, MSI or Bundle packages for Office add-ins. PRO is required for Modern Forms and add-in licensing features.",
         sameAs: ["https://github.com/fernand21/ribbon-ui-studio"]
       }
     ]
