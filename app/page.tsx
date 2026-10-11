@@ -196,7 +196,7 @@ export default function Home() {
   return <main>
     <header className="site-header">
       <a href="#top" aria-label="Ribbon UI Studio"><Brand /></a>
-      <nav aria-label="Main navigation"><a href="#download">{t.nav[0]}</a><a href={`${siteBase}/docs/`}>{t.nav[1]}</a><a href="#screenshots">{t.nav[2]}</a><a href="#versions">{t.nav[3]}</a><a href={`${siteBase}/support/`}>{lang === "es" ? "Donaciones / PRO" : "Support / PRO"}</a></nav>
+      <nav aria-label="Main navigation"><a href="#download">{t.nav[0]}</a><a href={`${siteBase}/docs/`}>{t.nav[1]}</a><a href="#screenshots">{t.nav[2]}</a><a href="#versions">{t.nav[3]}</a><a href={`${siteBase}/support/`}>{lang === "es" ? "Obtener PRO" : "Get PRO"}</a></nav>
       <label className="language-picker"><span aria-hidden="true">◎</span><select value={lang} onChange={(e)=>changeLanguage(e.target.value as Lang)} aria-label="Language">{languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}</select></label>
     </header>
 
