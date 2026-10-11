@@ -26,7 +26,7 @@ const isInstallerAsset = (asset:ReleaseAsset) => /\.exe$/i.test(asset.name) && !
 // The previous v3.0.0 portable EXE had 2 downloads before it was replaced.
 const historicalRemovedDownloads = { installer: 0, portable: 2 };
 
-const downloadsWord: Record<Lang, string> = {
+const getProLabel: Record<Lang,string> = { en:"Get PRO", es:"Obtener PRO", pt:"Obter PRO", fr:"Obtenir PRO", de:"PRO erhalten", it:"Ottieni PRO", ru:"Получить PRO", zh:"获取 PRO", ja:"PRO を入手", hi:"PRO प्राप्त करें" };\n\nconst downloadsWord: Record<Lang, string> = {
   en:"downloads", es:"descargas", pt:"downloads", fr:"téléchargements", de:"Downloads",
   it:"download", ru:"скачиваний", zh:"次下载", ja:"ダウンロード", hi:"डाउनलोड",
 };
@@ -196,7 +196,7 @@ export default function Home() {
   return <main>
     <header className="site-header">
       <a href="#top" aria-label="Ribbon UI Studio"><Brand /></a>
-      <nav aria-label="Main navigation"><a href="#download">{t.nav[0]}</a><a href={`${siteBase}/docs/`}>{t.nav[1]}</a><a href="#screenshots">{t.nav[2]}</a><a href="#versions">{t.nav[3]}</a><a href={`${siteBase}/support/`}>{lang === "es" ? "Obtener PRO" : "Get PRO"}</a></nav>
+      <nav aria-label="Main navigation"><a href="#download">{t.nav[0]}</a><a href={`${siteBase}/docs/`}>{t.nav[1]}</a><a href="#screenshots">{t.nav[2]}</a><a href="#versions">{t.nav[3]}</a><a href={`${siteBase}/support/`}>{getProLabel[lang]}</a></nav>
       <label className="language-picker"><span aria-hidden="true">◎</span><select value={lang} onChange={(e)=>changeLanguage(e.target.value as Lang)} aria-label="Language">{languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}</select></label>
     </header>
 
