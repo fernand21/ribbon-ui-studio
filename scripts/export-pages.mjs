@@ -68,7 +68,7 @@ async function renderPage(route, destination) {
 // /docs/ is generated from app/docs so it shares the homepage theme and
 // multilingual UI instead of falling back to the removed legacy static page.
 await renderPage("/", "index.html");
-await renderPage("/docs/", "docs/index.html");
+await renderPage("/docs/", "docs/index.html");\nawait renderPage("/support/", "support/index.html");\nawait renderPage("/supporters/", "supporters/index.html");
 
 await writeFile(path.join(output, ".nojekyll"), "", "utf8");
 console.log(output);
