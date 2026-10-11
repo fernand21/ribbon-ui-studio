@@ -7,6 +7,7 @@ const languages=[["en","English"],["es","Español"],["pt","Português"],["fr","F
 type Lang=(typeof languages)[number][0];
 type Supporter={id:string;name:string;level?:string;issued?:string;public?:boolean};
 type Registry={supporters:Supporter[]};
+const demoRecord:Supporter={id:"RUS-DEMO-00001",name:"Alex Morgan",level:"Founding Supporter",issued:"October 2026",public:true};
 
 const text:Record<Lang,{title:string;intro:string;support:string;empty:string;loading:string;invalid:string;invalidText:string;back:string;body:string;thanks:string;issued:string;verify:string;print:string;copy:string;view:string;cert:string;permanent:string;creator:string}>={
 en:{title:"Ribbon UI Studio Supporters",intro:"Only supporters who authorized public recognition appear here. Contribution amounts are never published.",support:"Support / send receipt",empty:"The first supporters will appear here after they authorize public recognition.",loading:"Loading…",invalid:"Certificate not verified",invalidText:"The Supporter ID is not present in the current public registry.",back:"Back to registry",body:"This certificate officially recognizes support for the independent development of Ribbon UI Studio.",thanks:"Thank you for helping Ribbon UI Studio keep growing. Your support becomes part of the project's history.",issued:"Issued",verify:"Scan to verify this certificate",print:"Print / Save PDF",copy:"Copy verification link",view:"View supporters",cert:"OFFICIAL SUPPORTER CERTIFICATE",permanent:"PERMANENT · DOES NOT EXPIRE",creator:"Creator of Ribbon UI Studio"},
@@ -27,17 +28,19 @@ export default function SupportersPage(){
   const [loaded,setLoaded]=useState(false);
   useEffect(()=>{const saved=localStorage.getItem("ore-language") as Lang|null;if(saved&&languages.some(([code])=>code===saved))setLang(saved);fetch("../supporters/data.json",{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>setData(d&&Array.isArray(d.supporters)?d:{supporters:[]})).finally(()=>setLoaded(true));},[]);
   const t=text[lang];
-  const requested=typeof window!=="undefined"?new URLSearchParams(window.location.search).get("id")?.trim():"";
-  const record=useMemo(()=>requested?data.supporters.find(x=>x.id.toLowerCase()===requested.toLowerCase()):undefined,[requested,data]);
-  const verifyUrl=record&&typeof window!=="undefined"?`${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(record.id)}`:"";
+  const params=typeof window!=="undefined"?new URLSearchParams(window.location.search):null;
+  const demo=params?.get("demo")==="1";
+  const requested=params?.get("id")?.trim()||"";
+  const record=useMemo(()=>demo?demoRecord:(requested?data.supporters.find(x=>x.id.toLowerCase()===requested.toLowerCase()):undefined),[demo,requested,data]);
+  const verifyUrl=record&&typeof window!=="undefined"?(demo?`${window.location.origin}${window.location.pathname}?demo=1`:`${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(record.id)}`):"";
   const qrUrl=verifyUrl?`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(verifyUrl)}`:"";
   const publicList=data.supporters.filter(x=>x.public===true);
   return <main className={styles.page}><div className={styles.wrap}>
     <div className={styles.topbar}><a className={styles.brand} href="../">RIBBON UI <em>STUDIO</em></a><select className={styles.lang} value={lang} onChange={e=>{const v=e.target.value as Lang;setLang(v);localStorage.setItem("ore-language",v)}}>{languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}</select></div>
-    {!requested&&<><div className={styles.registryHero}><div><div className={styles.eyebrow}>Supporter Registry</div><h1 className={styles.title}>{t.title}</h1><p className={styles.lead}>{t.intro}</p></div><div className={styles.actions}><a className={`${styles.button} ${styles.primary}`} href="../support/">{t.support}</a></div></div><section className={styles.supporterGrid}>{publicList.length?publicList.map(s=><a className={styles.supporter} key={s.id} href={`?id=${encodeURIComponent(s.id)}`}><strong>{s.name||"Private Supporter"}</strong><span>{s.level||"Official Supporter"} · {s.id}</span></a>):<div className={styles.panel}>{loaded?t.empty:t.loading}</div>}</section></>}
-    {requested&&loaded&&!record&&<section className={`${styles.panel} ${styles.invalid}`}><h1>{t.invalid}</h1><p>{t.invalidText}</p><a className={styles.back} href="../supporters/">{t.back}</a></section>}
+    {!requested&&!demo&&<><div className={styles.registryHero}><div><div className={styles.eyebrow}>Supporter Registry</div><h1 className={styles.title}>{t.title}</h1><p className={styles.lead}>{t.intro}</p></div><div className={styles.actions}><a className={`${styles.button} ${styles.primary}`} href="../support/">{t.support}</a></div></div><section className={styles.supporterGrid}>{publicList.length?publicList.map(s=><a className={styles.supporter} key={s.id} href={`?id=${encodeURIComponent(s.id)}`}><strong>{s.name||"Private Supporter"}</strong><span>{s.level||"Official Supporter"} · {s.id}</span></a>):<div className={styles.panel}>{loaded?t.empty:t.loading}</div>}</section></>}
+    {requested&&loaded&&!record&&!demo&&<section className={`${styles.panel} ${styles.invalid}`}><h1>{t.invalid}</h1><p>{t.invalidText}</p><a className={styles.back} href="../supporters/">{t.back}</a></section>}
     {record&&<><section className={styles.certificateShell}><article className={styles.certificate}>
-      <div className={styles.certOrnament}>✦</div><div className={styles.certBrand}>RIBBON UI <em>STUDIO</em></div><div className={styles.certTitle}>{t.cert}</div>
+      <div className={styles.certOrnament}>✦</div>{demo&&<div className={styles.demoBadge}>DEMO · SAMPLE CERTIFICATE</div>}<div className={styles.certBrand}>RIBBON UI <em>STUDIO</em></div><div className={styles.certTitle}>{t.cert}</div>
       <div className={styles.certSeal}><span>★</span><b>OFFICIAL</b><small>SUPPORTER</small></div>
       <div className={styles.certRecognizes}>Ribbon UI Studio proudly recognizes</div><div className={styles.certName}>{record.name||"Private Supporter"}</div>
       <p className={styles.certBody}>{t.body}</p><div className={styles.thankYou}>{t.thanks}</div>
