@@ -26,7 +26,9 @@ const isInstallerAsset = (asset:ReleaseAsset) => /\.exe$/i.test(asset.name) && !
 // The previous v3.0.0 portable EXE had 2 downloads before it was replaced.
 const historicalRemovedDownloads = { installer: 0, portable: 2 };
 
-const getProLabel: Record<Lang,string> = { en:"Get PRO", es:"Obtener PRO", pt:"Obter PRO", fr:"Obtenir PRO", de:"PRO erhalten", it:"Ottieni PRO", ru:"Получить PRO", zh:"获取 PRO", ja:"PRO を入手", hi:"PRO प्राप्त करें" };\n\nconst downloadsWord: Record<Lang, string> = {
+const getProLabel: Record<Lang,string> = { en:"Get PRO", es:"Obtener PRO", pt:"Obter PRO", fr:"Obtenir PRO", de:"PRO erhalten", it:"Ottieni PRO", ru:"Получить PRO", zh:"获取 PRO", ja:"PRO を入手", hi:"PRO प्राप्त करें" };
+
+const downloadsWord: Record<Lang, string> = {
   en:"downloads", es:"descargas", pt:"downloads", fr:"téléchargements", de:"Downloads",
   it:"download", ru:"скачиваний", zh:"次下载", ja:"ダウンロード", hi:"डाउनलोड",
 };
