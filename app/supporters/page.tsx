@@ -26,11 +26,17 @@ export default function SupportersPage(){
   const [lang,setLang]=useState<Lang>("en");
   const [data,setData]=useState<Registry>({supporters:[]});
   const [loaded,setLoaded]=useState(false);
-  useEffect(()=>{const saved=localStorage.getItem("ore-language") as Lang|null;if(saved&&languages.some(([code])=>code===saved))setLang(saved);fetch("../supporters/data.json",{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>setData(d&&Array.isArray(d.supporters)?d:{supporters:[]})).finally(()=>setLoaded(true));},[]);
+  const [demo,setDemo]=useState(false);
+  const [requested,setRequested]=useState("");
+  useEffect(()=>{
+    const saved=localStorage.getItem("ore-language") as Lang|null;
+    if(saved&&languages.some(([code])=>code===saved))setLang(saved);
+    const params=new URLSearchParams(window.location.search);
+    setDemo(params.get("demo")==="1");
+    setRequested(params.get("id")?.trim()||"");
+    fetch("../supporters/data.json",{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>setData(d&&Array.isArray(d.supporters)?d:{supporters:[]})).finally(()=>setLoaded(true));
+  },[]);
   const t=text[lang];
-  const params=typeof window!=="undefined"?new URLSearchParams(window.location.search):null;
-  const demo=params?.get("demo")==="1";
-  const requested=params?.get("id")?.trim()||"";
   const record=useMemo(()=>demo?demoRecord:(requested?data.supporters.find(x=>x.id.toLowerCase()===requested.toLowerCase()):undefined),[demo,requested,data]);
   const verifyUrl=record&&typeof window!=="undefined"?(demo?`${window.location.origin}${window.location.pathname}?demo=1`:`${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(record.id)}`):"";
   const qrUrl=verifyUrl?`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(verifyUrl)}`:"";
