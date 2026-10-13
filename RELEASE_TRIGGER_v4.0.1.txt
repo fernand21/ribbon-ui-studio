@@ -1,0 +1,2 @@
+Ribbon UI Studio v4.0.1 release trigger
+Maintenance release: EULA/license agreement added.
