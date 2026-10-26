@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import styles from "../support-flow.module.css";
 
 const PAYPAL = "https://www.paypal.com/paypalme/OfficeRibbon";
+const PAYPAL_PRO = "https://www.paypal.com/paypalme/OfficeRibbon/10USD";
 const CONTACT = "farevalo210@gmail.com";
 const FORM_ENDPOINT = `https://formsubmit.co/${CONTACT}`;
 
@@ -51,7 +52,14 @@ export default function SupportPage() {
   const [status,setStatus]=useState("");
   const [amount,setAmount]=useState("");
   const [requestType,setRequestType]=useState("supporter");
-  useEffect(()=>{const saved=window.localStorage.getItem("ore-language") as Lang|null;if(saved && languages.some(([code])=>code===saved))setLang(saved);},[]);
+  useEffect(()=>{
+    const saved=window.localStorage.getItem("ore-language") as Lang|null;
+    if(saved && languages.some(([code])=>code===saved))setLang(saved);
+    if(new URLSearchParams(window.location.search).get("pro")==="1"){
+      setAmount("10");
+      setRequestType("pro");
+    }
+  },[]);
   const t=copy[lang];
   const a=amountCopy[lang];
 
@@ -74,7 +82,7 @@ export default function SupportPage() {
   return <main className={styles.page}><div className={styles.wrap}>
     <div className={styles.topbar}><a className={styles.brand} href="../">RIBBON UI <em>STUDIO</em></a><select className={styles.lang} value={lang} onChange={e=>{const v=e.target.value as Lang;setLang(v);localStorage.setItem("ore-language",v)}}>{languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}</select></div>
     <section className={styles.hero}>
-      <article className={styles.card}><div className={styles.eyebrow}>{t.eyebrow}</div><h1 className={styles.title}>{t.title}</h1><p className={styles.lead}>{t.lead}</p><div className={styles.actions}><a className={`${styles.button} ${styles.paypal}`} href={PAYPAL} target="_blank" rel="noreferrer">{t.donate}</a><a className={styles.button} href="../supporters/">{t.registry}</a><a className={styles.button} href="../supporters/?demo=1">🎓 Demo certificate</a></div><div className={styles.notice}>{t.manual}</div></article>
+      <article className={styles.card}><div className={styles.eyebrow}>{t.eyebrow}</div><h1 className={styles.title}>{t.title}</h1><p className={styles.lead}>{t.lead}</p><div className={styles.actions}><a className={`${styles.button} ${styles.paypal}`} href={PAYPAL} target="_blank" rel="noreferrer">{t.supporter}</a><a className={`${styles.button} ${styles.primary}`} href={PAYPAL_PRO} target="_blank" rel="noreferrer" onClick={()=>{setAmount("10");setRequestType("pro");setStatus(a.eligible)}}>{t.pro}</a><a className={styles.button} href="../supporters/">{t.registry}</a><a className={styles.button} href="../supporters/?demo=1">🎓 Demo certificate</a></div><div className={styles.notice}>{t.manual}</div></article>
       <aside className={styles.panel}><div className={styles.eyebrow}>Ribbon UI Studio</div><div className={styles.grid}><div><h2>{t.supporter}</h2><p className={styles.lead}>{t.supporterText}</p></div><div><h2>{t.pro}</h2><p className={styles.lead}>{t.proText}</p></div></div></aside>
     </section>
     <form className={styles.form} action={FORM_ENDPOINT} method="POST" encType="multipart/form-data" onSubmit={submit}>
