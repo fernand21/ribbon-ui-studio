@@ -13,6 +13,19 @@ const languages = [
 ] as const;
 type Lang = (typeof languages)[number][0];
 
+const amountCopy: Record<Lang,{label:string;hint:string;eligible:string;machineRequired:string}> = {
+  en:{label:"Contribution amount (USD)",hint:"US$10 or more qualifies for one PRO license after verification.",eligible:"Your contribution qualifies for PRO. PRO was selected automatically.",machineRequired:"Enter the Machine Code to request a PRO license."},
+  es:{label:"Importe del aporte (USD)",hint:"US$10 o más califica para una licencia PRO tras la verificación.",eligible:"Tu aporte califica para PRO. Se seleccionó PRO automáticamente.",machineRequired:"Ingresa el Machine Code para solicitar una licencia PRO."},
+  pt:{label:"Valor da contribuição (USD)",hint:"US$10 ou mais dá direito a uma licença PRO após verificação.",eligible:"Sua contribuição se qualifica para PRO. PRO foi selecionado automaticamente.",machineRequired:"Informe o Machine Code para solicitar uma licença PRO."},
+  fr:{label:"Montant de la contribution (USD)",hint:"10 US$ ou plus donne droit à une licence PRO après vérification.",eligible:"Votre contribution est éligible à PRO. PRO a été sélectionné automatiquement.",machineRequired:"Saisissez le Machine Code pour demander une licence PRO."},
+  de:{label:"Beitrag (USD)",hint:"Ab 10 US$ besteht nach Prüfung Anspruch auf eine PRO-Lizenz.",eligible:"Ihr Beitrag qualifiziert sich für PRO. PRO wurde automatisch ausgewählt.",machineRequired:"Geben Sie den Machine Code ein, um eine PRO-Lizenz anzufordern."},
+  it:{label:"Importo del contributo (USD)",hint:"US$10 o più dà diritto a una licenza PRO dopo la verifica.",eligible:"Il tuo contributo è idoneo per PRO. PRO è stato selezionato automaticamente.",machineRequired:"Inserisci il Machine Code per richiedere una licenza PRO."},
+  ru:{label:"Сумма взноса (USD)",hint:"Взнос от US$10 дает право на одну PRO-лицензию после проверки.",eligible:"Ваш взнос подходит для PRO. PRO выбран автоматически.",machineRequired:"Введите Machine Code для запроса PRO-лицензии."},
+  zh:{label:"支持金额 (USD)",hint:"US$10 或以上经验证后可获得一份 PRO 许可证。",eligible:"你的支持金额符合 PRO 条件，已自动选择 PRO。",machineRequired:"申请 PRO 许可证需要填写 Machine Code。"},
+  ja:{label:"支援額 (USD)",hint:"US$10 以上は確認後、PRO ライセンス1つの対象になります。",eligible:"この支援額は PRO の対象です。PRO が自動選択されました。",machineRequired:"PRO ライセンスを申請するには Machine Code を入力してください。"},
+  hi:{label:"योगदान राशि (USD)",hint:"US$10 या अधिक सत्यापन के बाद एक PRO लाइसेंस के लिए योग्य है।",eligible:"आपका योगदान PRO के लिए योग्य है। PRO स्वतः चुना गया है।",machineRequired:"PRO लाइसेंस के लिए Machine Code दर्ज करें।"}
+};
+
 type SupportCopy = {
   eyebrow:string; title:string; lead:string; supporter:string; supporterText:string; pro:string; proText:string;
   donate:string; registry:string; after:string; afterText:string; name:string; email:string; reference:string; kind:string;
@@ -36,8 +49,11 @@ const copy: Record<Lang,SupportCopy> = {
 export default function SupportPage() {
   const [lang,setLang]=useState<Lang>("en");
   const [status,setStatus]=useState("");
+  const [amount,setAmount]=useState("");
+  const [requestType,setRequestType]=useState("supporter");
   useEffect(()=>{const saved=window.localStorage.getItem("ore-language") as Lang|null;if(saved && languages.some(([code])=>code===saved))setLang(saved);},[]);
   const t=copy[lang];
+  const a=amountCopy[lang];
 
   function validateFile(e:React.ChangeEvent<HTMLInputElement>){
     const file=e.target.files?.[0]; if(!file){setStatus("");return;}
@@ -49,6 +65,9 @@ export default function SupportPage() {
     const file=(form.elements.namedItem("attachment") as HTMLInputElement)?.files?.[0];
     if(!file){e.preventDefault();setStatus(t.attachRequired);return;}
     if(file.size>10*1024*1024){e.preventDefault();setStatus(t.tooLarge);return;}
+    const kind=(form.elements.namedItem("Request type") as HTMLSelectElement)?.value;
+    const machine=(form.elements.namedItem("Machine Code") as HTMLInputElement)?.value?.trim();
+    if(kind==="pro" && !machine){e.preventDefault();setStatus(a.machineRequired);return;}
     setStatus(t.sending);
   }
 
@@ -59,15 +78,16 @@ export default function SupportPage() {
       <aside className={styles.panel}><div className={styles.eyebrow}>Ribbon UI Studio</div><div className={styles.grid}><div><h2>{t.supporter}</h2><p className={styles.lead}>{t.supporterText}</p></div><div><h2>{t.pro}</h2><p className={styles.lead}>{t.proText}</p></div></div></aside>
     </section>
     <form className={styles.form} action={FORM_ENDPOINT} method="POST" encType="multipart/form-data" onSubmit={submit}>
-      <input type="hidden" name="_subject" value="Ribbon UI Studio - Supporter certificate / PRO license request"/><input type="hidden" name="_template" value="table"/><input type="text" name="_honey" tabIndex={-1} autoComplete="off" style={{display:"none"}}/>
+      <input type="hidden" name="_subject" value="Ribbon UI Studio - Supporter certificate / PRO license request"/><input type="hidden" name="_template" value="table"/><input type="hidden" name="_autoresponse" value="Thank you for supporting Ribbon UI Studio. We received your request. Contributions of US$10 or more qualify for one PRO license after verification. If you requested PRO, your receipt and Machine Code will be reviewed and the license will be sent to this email address."/><input type="text" name="_honey" tabIndex={-1} autoComplete="off" style={{display:"none"}}/>
       <div className={styles.eyebrow}>{t.after}</div><h2>{t.after}</h2><p className={styles.lead}>{t.afterText}</p>
       <div className={styles.formGrid}>
         <div className={styles.field}><label>{t.name}</label><input name="Name or alias" maxLength={80} required/></div>
         <div className={styles.field}><label>{t.email}</label><input name="email" type="email" maxLength={160} required/></div>
+        <div className={styles.field}><label>{a.label}</label><input name="Contribution amount (USD)" type="number" min="0.01" step="0.01" value={amount} onChange={e=>{const v=e.target.value;setAmount(v);const n=Number(v);if(v!=="" && Number.isFinite(n))setRequestType(n>=10?"pro":"supporter");}} required/><span className={styles.help}>{amount!=="" && Number(amount)>=10?a.eligible:a.hint}</span></div>
         <div className={styles.field}><label>{t.reference}</label><input name="Payment reference" maxLength={160}/></div>
-        <div className={styles.field}><label>{t.kind}</label><select name="Request type" defaultValue="supporter"><option value="supporter">{t.supportOnly}</option><option value="pro">{t.proRequest}</option></select></div>
+        <div className={styles.field}><label>{t.kind}</label><select name="Request type" value={requestType} onChange={e=>setRequestType(e.target.value)}><option value="supporter">{t.supportOnly}</option><option value="pro">{t.proRequest}</option></select></div>
         <div className={styles.field}><label>{t.receipt}</label><input name="attachment" type="file" accept="image/png,image/jpeg,application/pdf" onChange={validateFile} required/><span className={styles.help}>Max. 10 MB</span></div>
-        <div className={styles.field}><label>{t.machine}</label><input name="Machine Code" maxLength={240}/></div>
+        <div className={styles.field}><label>{t.machine}</label><input name="Machine Code" maxLength={240} required={requestType==="pro"}/></div>
       </div>
       <label className={styles.check}><input type="checkbox" name="Public supporters listing" value="Yes"/><span>{t.publicLabel}</span></label>
       <div className={styles.actions}><button className={`${styles.button} ${styles.primary}`} type="submit">{t.submit}</button><a className={styles.button} href="../supporters/">{t.registry}</a></div>
