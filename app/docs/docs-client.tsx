@@ -128,7 +128,7 @@ export default function DocsClient() {
           <div className={styles.navGroup}><b>{t.startGroup}</b>{nav.slice(0,3).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
           <div className={styles.navGroup}><b>RibbonX</b>{nav.slice(3,7).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
           <div className={styles.navGroup}><b>{t.addinsGroup}</b>{nav.slice(7,9).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
-          <div className={styles.navGroup}><b>Modern Forms · PRO</b><a href={`${siteBase}/docs/modern-forms-guide/`}>Modern Forms — VBA, Ribbon &amp; deployment</a></div>
+          <div className={styles.navGroup}><b>Modern Forms · PRO</b><a href="#modern-forms-tutorial">Modern Forms — VBA, Ribbon &amp; deployment</a></div>
           <div className={styles.navGroup}><b>{t.referenceGroup}</b>{nav.slice(9).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
         </aside>
 
@@ -137,10 +137,53 @@ export default function DocsClient() {
             <span className={styles.kicker}>Modern Forms · PRO · VBA</span>
             <h2>{lang === "es" ? "Tutorial práctico: Modern Forms y Modern Message" : "Practical tutorial: Modern Forms & Modern Message"}</h2>
             <p>{lang === "es" ? "Aprende a crear frmCustomer, conectarlo a un botón Ribbon, recuperar valores con VBA y usar OER_ModernMsgBox. Incluye código listo para adaptar y la instalación COM necesaria." : "Create frmCustomer, call it from a Ribbon button, read values in VBA, and use OER_ModernMsgBox. Includes adaptable code and COM deployment instructions."}</p>
-            <p><a href={`${siteBase}/docs/modern-forms-guide/`} style={{color:"#67e8f9",fontWeight:700}}>{lang === "es" ? "Abrir guía con ejemplos VBA →" : "Open VBA examples and step-by-step guide →"}</a></p>
+            <p><a href="#modern-forms-examples" style={{color:"#67e8f9",fontWeight:700}}>{lang === "es" ? "Abrir guía con ejemplos VBA →" : "Open VBA examples and step-by-step guide →"}</a></p>
             <CodeBlock label="Ribbon callback · VBA">{`Public Sub OpenCustomer(control As IRibbonControl)\n    OER_OpenModernForm_frmCustomer\nEnd Sub`}</CodeBlock>
             <CodeBlock label="Modern Message · VBA">{`Public Sub ShowModernMessage(control As IRibbonControl)\n    OER_ModernMsgBox "Operation completed", vbInformation, "Ribbon UI Studio"\nEnd Sub`}</CodeBlock>
             <p>{lang === "es" ? "Importante: Modern Forms requiere el runtime instalado mediante EXE/MSI. Exportar el archivo Office por separado no registra la DLL COM." : "Important: Modern Forms requires the EXE/MSI-installed runtime. Standalone Office file export does not register the COM DLL."}</p>
+          </article>
+          <article id="modern-forms-examples" className={styles.article}>
+            <span className={styles.kicker}>Modern Forms · Practical VBA examples</span>
+            <h2>{lang === "es" ? "Cómo crear, abrir y usar Modern Forms" : "How to create, open and use Modern Forms"}</h2>
+            <p>{lang === "es" ? "Crea un complemento XLAM, DOTM o PPAM y abre Modern Forms Designer desde Herramientas (PRO). Crea frmCustomer con txtName (TextBox), cmbDepartment (ComboBox), chkActive (CheckBox), btnSave (Action: accept) y btnCancel (Action: cancel). Guarda: el editor sincroniza forms.json e inyecta OERModernFormsBootstrap." : "Create an XLAM, DOTM or PPAM add-in, then open Modern Forms Designer from Tools (PRO). Create frmCustomer with txtName (TextBox), cmbDepartment (ComboBox), chkActive (CheckBox), btnSave (Action: accept) and btnCancel (Action: cancel). Save: the editor synchronizes forms.json and injects OERModernFormsBootstrap."}</p>
+            <h3>{lang === "es" ? "Llamada desde RibbonX" : "Calling from RibbonX"}</h3>
+            <p>{lang === "es" ? "En Ribbon Designer define onAction=OpenCustomer. En un módulo VBA estándar, agrega este callback. La llamada OER_OpenModernForm_frmCustomer abre el formulario y despacha los eventos del botón según el módulo generado." : "Set onAction=OpenCustomer in Ribbon Designer. Add this callback in a standard VBA module. OER_OpenModernForm_frmCustomer opens the form and dispatches button events using the generated module."}</p>
+            <CodeBlock label="RibbonCallbacks.bas">{`Public Sub OpenCustomer(control As IRibbonControl)
+    OER_OpenModernForm_frmCustomer
+End Sub`}</CodeBlock>
+            <h3>{lang === "es" ? "Abrir y leer los controles" : "Open and read values"}</h3>
+            <p>{lang === "es" ? "OER_ShowModernForm_frmCustomer devuelve un resultado JSON directamente, sin despachar por sí mismo los eventos generados. Puedes leer los valores por ID:" : "OER_ShowModernForm_frmCustomer returns the result JSON directly; it does not itself dispatch generated events. Read values by control ID:"}</p>
+            <CodeBlock label="VBA · Results">{`Public Sub ReadCustomer(control As IRibbonControl)
+    Dim resultJson As String
+    resultJson = OER_ShowModernForm_frmCustomer()
+    If Not OER_ModernFormAccepted(resultJson) Then Exit Sub
+
+    Dim customerName As String
+    customerName = OER_ModernFormValue(resultJson, "txtName")
+    Dim department As String
+    department = OER_ModernFormValue(resultJson, "cmbDepartment")
+    Dim activeValue As String
+    activeValue = OER_ModernFormValue(resultJson, "chkActive")
+
+    MsgBox customerName & " - " & department & " - " & activeValue
+End Sub`}</CodeBlock>
+            <h3>{lang === "es" ? "Mensajes modernos — OER_ModernMsgBox" : "Modern messages — OER_ModernMsgBox"}</h3>
+            <p>{lang === "es" ? "Guarda el proyecto para que se genere OERModernMessages. Ejemplos de información y confirmación con la misma convención de argumentos que MsgBox. Comprueba la firma del módulo generado si trabajas con otra versión." : "Save the project so OERModernMessages is generated. Examples using MsgBox-style parameters. Check the generated module signature if using another version."}</p>
+            <CodeBlock label="VBA · Modern Message">{`Public Sub NotifyCustomer(control As IRibbonControl)
+    OER_ModernMsgBox "Customer saved", vbInformation, "Customers"
+End Sub
+
+Public Sub AskBeforeDelete(control As IRibbonControl)
+    Dim answer As VbMsgBoxResult
+    answer = OER_ModernMsgBox("Delete customer?", vbYesNo Or vbQuestion, "Confirm")
+    If answer = vbYes Then
+        ' Delete customer only after confirmation.
+    End If
+End Sub`}</CodeBlock>
+            <h3>{lang === "es" ? "Eventos de botones y GroupBox" : "Button events and GroupBox"}</h3>
+            <p>{lang === "es" ? "Los GroupBox admiten hijos y contenedores anidados; Parent indica la jerarquía y las coordenadas de los hijos son locales. El editor puede generar módulos OERF_ por formulario; modifica el cuerpo del handler existente, sin duplicarlo. Los nombres, parámetros y llamadas del VBA generado en tu archivo son la referencia definitiva." : "GroupBox controls support nested children with parent-local coordinates. The editor can generate per-form OERF_ event modules; edit existing handler bodies without duplicating them. The generated VBA in your file is the definitive reference for names and signatures."}</p>
+            <h3>{lang === "es" ? "Instalación y error ActiveX" : "Installation and ActiveX error"}</h3>
+            <p>{lang === "es" ? "Modern Forms requiere OfficeEditor.ModernForms.dll, .NET Framework 4.8 y registro COM HKCU por complemento. Distribuye mediante el EXE/MSI de InstallerLab. Abrir un DOTM/XLAM/PPAM directamente puede mostrar «El componente ActiveX no puede crear el objeto» porque falta el ProgID registrado. La exportación protegida sin instalador no instala el runtime. Los UserForms clásicos no necesitan esta dependencia." : "Modern Forms requires OfficeEditor.ModernForms.dll, .NET Framework 4.8, and per-add-in HKCU COM registration. Distribute through an InstallerLab EXE/MSI. Opening a DOTM/XLAM/PPAM directly may show ActiveX component cannot create object because the ProgID was not registered. Standalone protected export does not install this runtime. Classic UserForms do not need it."}</p>
           </article>
           <V4Documentation lang={lang} siteBase={siteBase} />
           <section className={styles.stats}>
