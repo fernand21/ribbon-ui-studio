@@ -133,6 +133,15 @@ export default function DocsClient() {
         </aside>
 
         <div className={styles.content}>
+          <article className={styles.article} id="modern-forms-tutorial" style={{border:"1px solid #36b9cc",borderRadius:16,padding:24,marginBottom:26}}>
+            <span className={styles.kicker}>Modern Forms · PRO · VBA</span>
+            <h2>{lang === "es" ? "Tutorial práctico: Modern Forms y Modern Message" : "Practical tutorial: Modern Forms & Modern Message"}</h2>
+            <p>{lang === "es" ? "Aprende a crear frmCustomer, conectarlo a un botón Ribbon, recuperar valores con VBA y usar OER_ModernMsgBox. Incluye código listo para adaptar y la instalación COM necesaria." : "Create frmCustomer, call it from a Ribbon button, read values in VBA, and use OER_ModernMsgBox. Includes adaptable code and COM deployment instructions."}</p>
+            <p><a href={`${siteBase}/docs/modern-forms-guide/`} style={{color:"#67e8f9",fontWeight:700}}>{lang === "es" ? "Abrir guía con ejemplos VBA →" : "Open VBA examples and step-by-step guide →"}</a></p>
+            <CodeBlock label="Ribbon callback · VBA">{`Public Sub OpenCustomer(control As IRibbonControl)\n    OER_OpenModernForm_frmCustomer\nEnd Sub`}</CodeBlock>
+            <CodeBlock label="Modern Message · VBA">{`Public Sub ShowModernMessage(control As IRibbonControl)\n    OER_ModernMsgBox "Operation completed", vbInformation, "Ribbon UI Studio"\nEnd Sub`}</CodeBlock>
+            <p>{lang === "es" ? "Importante: Modern Forms requiere el runtime instalado mediante EXE/MSI. Exportar el archivo Office por separado no registra la DLL COM." : "Important: Modern Forms requires the EXE/MSI-installed runtime. Standalone Office file export does not register the COM DLL."}</p>
+          </article>
           <V4Documentation lang={lang} siteBase={siteBase} />
           <section className={styles.stats}>
             <div><strong>3</strong><span>{t.stats[0]}</span></div>
