@@ -69,6 +69,7 @@ async function renderPage(route, destination) {
 // multilingual UI instead of falling back to the removed legacy static page.
 await renderPage("/", "index.html");
 await renderPage("/docs/", "docs/index.html");
+await renderPage("/docs/modern-forms-guide/", "docs/modern-forms-guide/index.html");
 await renderPage("/support/", "support/index.html");
 await renderPage("/supporters/", "supporters/index.html");
 
