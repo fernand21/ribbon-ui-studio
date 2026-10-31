@@ -128,6 +128,7 @@ export default function DocsClient() {
           <div className={styles.navGroup}><b>{t.startGroup}</b>{nav.slice(0,3).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
           <div className={styles.navGroup}><b>RibbonX</b>{nav.slice(3,7).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
           <div className={styles.navGroup}><b>{t.addinsGroup}</b>{nav.slice(7,9).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
+          <div className={styles.navGroup}><b>Modern Forms · PRO</b><a href={`${siteBase}/docs/modern-forms-guide/`}>Modern Forms — VBA, Ribbon &amp; deployment</a></div>
           <div className={styles.navGroup}><b>{t.referenceGroup}</b>{nav.slice(9).map((item)=><a href={`#${item.id}`} key={item.id}>{item.title}</a>)}</div>
         </aside>
 
