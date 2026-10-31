@@ -64,7 +64,31 @@ export default function ModernFormsGuide(){
    <p style={styles.muted}>{es?"OER_ModernFormValue devuelve valores de controles por Id. ComboBox devuelve el texto seleccionado; CheckBox true/false. OER_ModernFormAction permite identificar el botón pulsado. Ajusta el ejemplo si tu formulario usa otros nombres.":"OER_ModernFormValue returns control values by ID. ComboBox returns selected text; CheckBox true/false. OER_ModernFormAction identifies the clicked button. Update the sample if you use different IDs."}</p>
    <h2 style={styles.h2}>{es?"4. Contenedores GroupBox y eventos":"4. GroupBox containers and events"}</h2>
    <p>{es?"GroupBox puede contener controles y otros GroupBox. La propiedad Parent del diseñador determina el contenedor; las posiciones de los hijos son relativas a su padre. Los botones con acción de aceptar/cancelar devuelven el resultado al VBA. Los handlers de Click generados se ejecutan después de cerrar el formulario cuando se usa OER_OpenModernForm_*.":"GroupBox can contain controls and other GroupBoxes. The designer's Parent property selects the parent container; child coordinates are relative to that parent. Accept/cancel buttons return the result to VBA. Generated Click handlers execute after the form closes when using OER_OpenModernForm_*."}</p>
-   <h2 style={styles.h2}>{es?"5. Distribución e instalación":"5. Deployment and installation"}</h2>
+   <h2 style={styles.h2}>{es?"5. Modern Message: cuadros de mensaje modernos":"5. Modern Message: modern message dialogs"}</h2>
+   <p>{es?"Al guardar un proyecto con Modern Forms, Ribbon UI Studio genera el módulo OERModernMessages y agrega el formulario frmMessageDialog. Desde un módulo VBA puedes usar OER_ModernMsgBox con una firma compatible con MsgBox: mensaje, botones/icono y título. El cuadro moderno depende del mismo runtime COM; el módulo generado puede recurrir a un mensaje nativo si falla la activación, según su implementación.":"When saving a project with Modern Forms, Ribbon UI Studio generates OERModernMessages and frmMessageDialog. In a VBA module, call OER_ModernMsgBox using MsgBox-compatible arguments: prompt, buttons/icon and title. The modern dialog uses the same COM runtime; the generated helper may fall back to a native message when activation fails, depending on its implementation."}</p>
+   <code style={styles.code}>{`Public Sub NotifyCustomer(control As IRibbonControl)
+    OER_ModernMsgBox "Customer saved successfully", vbInformation, "Customers"
+End Sub
+
+Public Sub ConfirmDelete()
+    Dim answer As VbMsgBoxResult
+    answer = OER_ModernMsgBox("Delete selected customer?", vbYesNo Or vbQuestion, "Confirm")
+    If answer = vbYes Then
+        ' Add your delete logic here.
+    End If
+End Sub`}</code>
+   <p style={styles.muted}>{es?"Ejemplo de uso: el callback NotifyCustomer se asigna al atributo onAction de un botón Ribbon. Antes de copiar el ejemplo de confirmación, verifica que la versión de OER_ModernMsgBox generada en tu archivo devuelve un VbMsgBoxResult (o tipo compatible); la firma concreta del módulo generado prevalece sobre este ejemplo.":"Usage: assign NotifyCustomer as the onAction callback of a Ribbon button. Before using the confirmation example, verify the OER_ModernMsgBox version generated in your file returns VbMsgBoxResult (or a compatible type); the generated module signature is authoritative."}</p>
+   <h2 style={styles.h2}>{es?"6. Ejemplo de evento de botón dentro de Modern Forms":"6. Example button event inside Modern Forms"}</h2>
+   <p>{es?"En el diseñador asigna btnSave como botón de aceptar. Al guardar, el editor genera un módulo de eventos OERF_frmCustomer (el nombre deriva del formulario). Busca allí el procedimiento btnSave_Click generado y utiliza el JSON entregado para leer valores.":"Set btnSave to the accept action in the designer. On save, the editor generates an OERF_frmCustomer events module (name derived from the form). Find the generated btnSave_Click handler and read values from its result JSON."}</p>
+   <code style={styles.code}>{`Private Sub btnSave_Click(ByVal resultJson As String)
+    Dim customerName As String
+    customerName = OER_ModernFormValue(resultJson, "txtName")
+    If OER_ModernFormAccepted(resultJson) Then
+        OER_ModernMsgBox "Saved: " & customerName, vbInformation, "Customers"
+    End If
+End Sub`}</code>
+   <p style={styles.muted}>{es?"Si el módulo ya contiene un handler generado, edita su cuerpo: no crees una segunda Sub con el mismo nombre. La ejecución del evento depende de llamar a OER_OpenModernForm_frmCustomer, que realiza el despacho; OER_ShowModernForm_frmCustomer solo devuelve el JSON.":"If the generated module already contains the event handler, edit its body rather than defining a duplicate. Event dispatch is performed by OER_OpenModernForm_frmCustomer; OER_ShowModernForm_frmCustomer returns JSON only."}</p>
+   <h2 style={styles.h2}>{es?"7. Distribución e instalación":"7. Deployment and installation"}</h2>
    <ol>
     <li>{es?"Guarda el complemento y comprueba el módulo OERModernFormsBootstrap.":"Save the add-in and check the OERModernFormsBootstrap module."}</li>
     <li>{es?"Genera el instalador EXE/MSI con el flujo InstallerLab de Ribbon UI Studio.":"Generate the EXE/MSI installer through Ribbon UI Studio's InstallerLab workflow."}</li>
