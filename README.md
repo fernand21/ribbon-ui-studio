@@ -1,87 +1,49 @@
-# Ribbon UI Studio v4.0.0
+# Ribbon UI Studio 5 — Microsoft Office Add-in IDE
 
-**Visual Office add-in studio for RibbonX, VBA, classic UserForms and modern Office UI workflows.**
+Ribbon UI Studio is a Windows desktop **integrated development environment for Microsoft Office add-ins**, combining a project explorer, visual RibbonX designer, Monaco-powered XML and VBA editing, callback diagnostics, resource management, classic VBA UserForms and additional PRO workflows.
 
-Ribbon UI Studio helps developers build and maintain Microsoft Office add-ins for Excel, Word and PowerPoint from one Windows desktop workspace.
+> Documentation for the v5 product line is in preparation. **Check GitHub Releases for the version actually published.** The documentation and marketing may describe the upcoming v5 scope before the stable binary is released.
 
-Version 4 adds a visual Ribbon designer, a native VBA UserForm designer and a separate PRO-only Modern Forms system, while retaining the RibbonX/XML, VBA, callback, imageMso and diagnostics workflows from the v3 line.
+## Guides
 
-## Website
+- **[Ribbon UI Studio 5 IDE documentation — Español / English](https://fernand21.github.io/ribbon-ui-studio/docs/v5/)** — practical step-by-step workflows and examples
+- [Documentation archive (v4)](https://fernand21.github.io/ribbon-ui-studio/docs/)
+- [Releases](https://github.com/fernand21/ribbon-ui-studio/releases)
 
-Official site and downloads:
+## IDE workflow
 
-https://fernand21.github.io/ribbon-ui-studio/
+1. Open an Office file or create a project for Excel, Word, or PowerPoint.
+2. Navigate modules, Ribbon, resources, classic UserForms, Modern Forms, Build and licensing in the project explorer.
+3. Design RibbonX visually or edit `customUI` / `customUI14` in Monaco.
+4. Write and check VBA callbacks; use editor assistance to inspect references and signatures.
+5. Manage imageMso/custom icons and visual forms.
+6. Validate the Office package, build a supported XLAM/DOTM/PPAM add-in, and test in Office.
+7. For Windows EXE/MSI/Bundle distribution, use **[InstallerLab](https://installerlab.website/)** separately.
 
-## v4 highlights
-
-- Ribbon Visual Designer with live preview, structure tree, toolbox and properties
-- Native VBA UserForm Designer for classic MSForms/VBA forms
-- RibbonX / customUI XML editing with Monaco
-- VBA module editing and callback generation
-- imageMso browser and custom icon workflow
-- Ribbon diagnostics and XML validation
-- Excel `.xlam`, Word `.dotm` and PowerPoint `.ppam` workflows
-- Modern Forms Designer and runtime in PRO
-- Modern VBA-compatible dialogs in PRO
-- Add or remove licensing from Office add-ins in PRO
-- InstallerLab-based Windows deployment workflow
-
-## Community vs PRO
+## Community and PRO
 
 | Capability | Community | PRO |
 |---|:---:|:---:|
-| RibbonX / VBA editing | ✅ | ✅ |
-| Ribbon Visual Designer | ✅ | ✅ |
-| Native VBA UserForm Designer | ✅ | ✅ |
-| imageMso / callback generation / diagnostics | ✅ | ✅ |
-| Modern Forms Designer + runtime | — | ✅ |
-| Modern VBA-compatible dialogs | — | ✅ |
-| Add licensing to add-ins | — | ✅ |
-| Remove add-in licensing | — | ✅ |
-| Advanced packaging / protected distribution | — | ✅ |
+| RibbonX and VBA editing | ✓ | ✓ |
+| Visual Ribbon Designer | ✓ | ✓ |
+| Native VBA/MSForms UserForms | ✓ | ✓ |
+| imageMso, callback analysis and diagnostics | ✓ | ✓ |
+| Modern Forms designer and runtime | — | ✓ |
+| Modern VBA-compatible dialogs | — | ✓ |
+| Add-in licensing tools | — | ✓ |
+| Advanced protection and distribution workflows | — | ✓ |
 
-Classic VBA UserForms and Modern Forms are two different systems. Community includes the visual designer for normal native VBA/MSForms UserForms. Modern Forms are exclusive to PRO.
+Classic VBA UserForms and PRO Modern Forms are **different systems**. InstallerLab is a separate dependency for building Windows installer artifacts. The IDE is not a drop-in replacement for Visual Studio or for every feature of the Microsoft VBA editor.
 
-## EXE / MSI / Bundle deployment requires InstallerLab
+## Development and support
 
-Ribbon UI Studio prepares the Office add-in and its deployment project, but **InstallerLab must be installed to convert/package the add-in as EXE, MSI or Bundle**.
+Website: https://fernand21.github.io/ribbon-ui-studio/
 
-InstallerLab:
+Repository: https://github.com/fernand21/ribbon-ui-studio
 
-https://installerlab.website/
-
-This dependency is intentionally documented separately because Ribbon UI Studio is the add-in design environment while InstallerLab is the Windows packaging application.
-
-## Real-world example
-
-The v4 documentation includes a LittleAPI Excel add-in as a real-world example of what can be built with Ribbon UI Studio: Ribbon UI, VBA, modern forms/dialogs and an external REST API working together.
-
-LittleAPI is shown as an example solution; it is not a required built-in dependency of Ribbon UI Studio.
-
-## Releases
-
-https://github.com/fernand21/ribbon-ui-studio/releases
-
-The website reads release/version/download information from GitHub Releases.
-
-## Documentation
-
-https://fernand21.github.io/ribbon-ui-studio/docs/
-
-## Source and distribution
-
-Ribbon UI Studio is proprietary software. This repository contains the public website and release/distribution resources; the application source remains private.
-
-## Local website development
+The website may read current release/version/download information dynamically from GitHub Releases. Software source is proprietary; this repository contains the public website and distribution resources.
 
 ```bash
 npm run dev
-```
-
-## Production validation
-
-```bash
 npm run build
 ```
-
-The website is deployed through GitHub Pages.

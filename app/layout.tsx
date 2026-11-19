@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 const siteUrl = "https://fernand21.github.io/ribbon-ui-studio/";
-const title = "Ribbon UI Studio v4.0.0 — Visual RibbonX, VBA UserForms & Modern Forms";
-const description = "Ribbon UI Studio v4 for Microsoft Office: visual Ribbon designer, RibbonX/customUI XML, VBA editing, classic VBA UserForms in Community, PRO Modern Forms and dialogs, add-in licensing, and InstallerLab-based EXE/MSI/Bundle deployment.";
+const title = "Ribbon UI Studio 5 IDE — Microsoft Office Add-in Development Environment";
+const description = "Ribbon UI Studio 5: integrated development environment for Office add-ins with project explorer, RibbonX designer, Monaco VBA editor, native UserForms, PRO Modern Forms, AI-assisted editing and InstallerLab deployment.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
