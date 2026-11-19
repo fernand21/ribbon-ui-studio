@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+const siteBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 type Chapter = { id: string; title: string; summary: string; steps: string[]; notes?: string[]; example?: string };
 type Language = "es" | "en";
@@ -69,10 +70,10 @@ export default function V5Documentation() {
  const items=useMemo(()=>chapters[lang].filter(c=>[c.title,c.summary,...c.steps,...(c.notes??[])].join(" ").toLowerCase().includes(query.toLowerCase().trim())),[lang,query]);
  return <main style={{background:"#f7f9fc",color:"#142338",fontFamily:"Arial, sans-serif",minHeight:"100vh"}}>
  <header style={{background:"#111d32",color:"#fff",padding:"18px max(24px,calc((100vw - 1160px)/2))",display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
-  <Link href="/" style={{color:"#fff",textDecoration:"none",fontWeight:800}}>Ribbon UI Studio <span style={{color:"#71d8ff"}}>5 · IDE</span></Link>
+  <Link href={`${siteBase}/`} style={{color:"#fff",textDecoration:"none",fontWeight:800}}>Ribbon UI Studio <span style={{color:"#71d8ff"}}>5 · IDE</span></Link>
   <nav style={{display:"flex",gap:14,alignItems:"center",flexWrap:"wrap"}}>
    <Link href="/" style={{color:"#dbe9ff"}}>{t.home}</Link>
-   <Link href="/docs" style={{color:"#dbe9ff"}}>{t.legacy}</Link>
+   <Link href={`${siteBase}/docs/`} style={{color:"#dbe9ff"}}>{t.legacy}</Link>
    <select aria-label="Documentation language" value={lang} onChange={e=>{setLang(e.target.value as Language);setQuery("");}} style={{padding:"8px 12px",borderRadius:8,background:"#fff",color:"#142338"}}><option value="es">Español</option><option value="en">English</option></select>
   </nav>
  </header>
