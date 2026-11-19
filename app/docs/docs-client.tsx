@@ -108,6 +108,7 @@ export default function DocsClient() {
         </label>
       </header>
 
+      <div style={{padding:"14px 30px",background:"#eaf5fc",textAlign:"center",color:"#173452"}}><strong>{lang === "es" ? "La nueva documentación del IDE v5 está disponible." : "The new v5 IDE documentation is available."}</strong> <a href={`${siteBase}/docs/v5/`} style={{color:"#125995",fontWeight:700}}>{lang === "es" ? "Abrir manual v5" : "Open v5 manual"} →</a></div>
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}><span />{t.official}</p>
