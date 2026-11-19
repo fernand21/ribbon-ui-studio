@@ -84,13 +84,13 @@ export default function V5Documentation() {
   <a href="https://github.com/fernand21/ribbon-ui-studio/releases" style={{display:"inline-block",marginTop:16,padding:"12px 18px",borderRadius:9,background:"#e9f8ff",color:"#123252",fontWeight:800,textDecoration:"none"}}>{t.download}</a>
  </section>
  <div style={{maxWidth:1180,margin:"auto",padding:"16px 24px",fontSize:13,color:"#4b647e"}}>{t.disclaimer}</div>
- <div style={{maxWidth:1180,margin:"0 auto",padding:"16px 24px 80px",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:32}}>
-  <aside style={{alignSelf:"start",background:"#fff",border:"1px solid #e0e8f2",borderRadius:14,padding:20}}>
+ <div style={{maxWidth:1180,margin:"0 auto",padding:"16px 24px 80px",display:"flex",flexWrap:"wrap",alignItems:"flex-start",gap:32}}>
+  <aside style={{alignSelf:"start",flex:"1 1 255px",maxWidth:320,background:"#fff",border:"1px solid #e0e8f2",borderRadius:14,padding:20}}>
    <label htmlFor="docSearch" style={{fontSize:13,fontWeight:800}}>{t.contents}</label>
    <input id="docSearch" value={query} onChange={e=>setQuery(e.target.value)} placeholder={t.search} style={{width:"100%",margin:"12px 0",boxSizing:"border-box",padding:12,border:"1px solid #ccd8e5",borderRadius:8,color:"#122338",background:"#fff"}}/>
    <div style={{display:"grid",gap:5}}>{items.map(c=><a key={c.id} href={"#"+c.id} style={{color:"#2462a3",textDecoration:"none",padding:"8px 3px",fontSize:14,lineHeight:1.4}}>{c.title}</a>)}</div>
   </aside>
-  <article style={{minWidth:0,gridColumn:"span 2"}}>{items.length===0?<p>No results / Sin resultados</p>:items.map(c=><section id={c.id} key={c.id} style={{scrollMarginTop:24,background:"#fff",border:"1px solid #e0e8f2",borderRadius:14,padding:"clamp(18px,3vw,34px)",marginBottom:22,boxShadow:"0 8px 25px #172a4510"}}>
+  <article style={{minWidth:0,flex:"3 1 570px"}}>{items.length===0?<p>No results / Sin resultados</p>:items.map(c=><section id={c.id} key={c.id} style={{scrollMarginTop:24,background:"#fff",border:"1px solid #e0e8f2",borderRadius:14,padding:"clamp(18px,3vw,34px)",marginBottom:22,boxShadow:"0 8px 25px #172a4510"}}>
    <h2 style={{fontSize:25,lineHeight:1.3,margin:"0 0 14px"}}>{c.title}</h2>
    <p style={{color:"#455b71",lineHeight:1.75}}>{c.summary}</p>
    <ol style={{paddingLeft:24,lineHeight:1.75}}>{c.steps.map((s,i)=><li key={i} style={{paddingBottom:9}}>{s}</li>)}</ol>
